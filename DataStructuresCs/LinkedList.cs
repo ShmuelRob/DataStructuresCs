@@ -7,8 +7,8 @@ namespace DataStructuresCs
 {
     public class LinkedList<T> : IList<T>, IEnumerable<T>, ICollection<T>
     {
-        Node first;
-        Node last;
+        LinkedListNode<T> first;
+        LinkedListNode<T> last;
 
         public T First { get => first.value; set => first.value = value; }
         public T Last { get => last.value; set => last.value = value; }
@@ -16,51 +16,51 @@ namespace DataStructuresCs
         public bool IsEmpty => first == null;
         public bool IsReadOnly { get; set; }
 
-        public LinkedList() // O(1)
+        public LinkedList()
         {
             first = null;
             last = null;
         }
-        public LinkedList(T item) => AddFirst(item); // O(1)
-        public LinkedList(params T[] items) // O(m)
+        public LinkedList(T item) => AddFirst(item);
+        public LinkedList(params T[] items)
         {
             for (int i = 0; i < items.Length; i++) AddLast(items[i]);
         }
-        public LinkedList(LinkedList<T> previousList) // O(1)
+        public LinkedList(LinkedList<T> previousList)
         {
             first = previousList.first;
             last = previousList.last;
         }
 
-        public void AddFirst(T item) // O(1)
+        public void AddFirst(T item)
         {
             if (IsReadOnly) return;
             if (last == null)
             {
-                first = new Node(item);
+                first = new LinkedListNode<T>(item);
                 last = first;
             }
             else
             {
-                var temp = new Node(item) { next = first };
+                var temp = new LinkedListNode<T>(item) { next = first };
                 first = temp;
             }
             Count++;
         }
-        public void AddLast(T item) // O(1)
+        public void AddLast(T item)
         {
             if (IsReadOnly) return;
             if (last == null) AddFirst(item);
             else
             {
-                Node newLast = new Node(item);
+                LinkedListNode<T> newLast = new LinkedListNode<T>(item);
                 last.next = newLast;
                 last = newLast;
                 Count++;
             }
         }
-        public bool RemoveFirst() => RemoveFirst(out _); // O(1)
-        public bool RemoveFirst(out T data) // O(1)
+        public bool RemoveFirst() => RemoveFirst(out _);
+        public bool RemoveFirst(out T data)
         {
             data = default;
             if (IsReadOnly) return false;
@@ -70,8 +70,8 @@ namespace DataStructuresCs
             Count--;
             return true;
         }
-        public bool RemoveLast() => RemoveLast(out _); // O(n)
-        public bool RemoveLast(out T data) // O(n)
+        public bool RemoveLast() => RemoveLast(out _);
+        public bool RemoveLast(out T data)
         {
             data = default;
             if (IsReadOnly) return false;
@@ -84,7 +84,7 @@ namespace DataStructuresCs
                 Count--;
                 return true;
             }
-            Node temp = first;
+            LinkedListNode<T> temp = first;
             while (temp.next != last) temp = temp.next;
             data = temp.next.value;
             temp.next = null;
@@ -94,16 +94,16 @@ namespace DataStructuresCs
         public void Add(params T[] items)
         {
             foreach (var item in items) Add(item);
-        } // O(m)
-        public void Add(T item) => AddLast(item); // O(1)
-        public void Clear() // O(1)
+        }
+        public void Add(T item) => AddLast(item);
+        public void Clear()
         {
             if (Count == 0) return;
             first.next = null;
             first = null;
             last = null;
         }
-        public bool Contains(T item) // O(n)
+        public bool Contains(T item)
         {
             if (first == null) return false;
             var temp = first;
@@ -114,8 +114,8 @@ namespace DataStructuresCs
             }
             return false;
         }
-        public void CopyTo(T[] array) => CopyTo(array, 0); // O(m)
-        public void CopyTo(T[] array, int arrayIndex) // O(m)
+        public void CopyTo(T[] array) => CopyTo(array, 0);
+        public void CopyTo(T[] array, int arrayIndex)
         {
             var temp = first;
             while (temp != null && arrayIndex < array.Length)
@@ -124,7 +124,7 @@ namespace DataStructuresCs
                 temp = temp.next;
             }
         }
-        public bool Remove(T item) // O(n)
+        public bool Remove(T item)
         {
             if (IsEmpty) return false;
             if (first.value.Equals(item)) return RemoveFirst();
@@ -140,7 +140,7 @@ namespace DataStructuresCs
             }
             return false;
         }
-        public int IndexOf(T item) // O(n)
+        public int IndexOf(T item)
         {
             if (IsEmpty) return -1;
             int ind = 0;
@@ -153,7 +153,7 @@ namespace DataStructuresCs
             }
             return -1;
         }
-        public void Insert(int index, T item) // O(n)
+        public void Insert(int index, T item)
         {
             if (index == 0)
             {
@@ -175,7 +175,7 @@ namespace DataStructuresCs
             for (int i = 0; i < index - 1; i++)
                 tempPrevious = tempPrevious.next;
 
-            var newNode = new Node(item)
+            var newNode = new LinkedListNode<T>(item)
             {
                 next = tempPrevious.next
             };
@@ -183,7 +183,7 @@ namespace DataStructuresCs
 
             Count++;
         }
-        public void RemoveAt(int index) // O(n)
+        public void RemoveAt(int index)
         {
             if (index < 0 || index >= Count) return;
             else if (index == 0) RemoveFirst();
@@ -197,7 +197,7 @@ namespace DataStructuresCs
                 Count--;
             }
         }
-        public override string ToString() // O(n)
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             var temp = first;
@@ -208,7 +208,7 @@ namespace DataStructuresCs
             }
             return sb.ToString();
         }
-        public DoubleLinkedList<T> ToDoubleLinkedList() // O(n)
+        public DoubleLinkedList<T> ToDoubleLinkedList()
         {
             DoubleLinkedList<T> list = new DoubleLinkedList<T>();
             var temp = first;
@@ -240,7 +240,7 @@ namespace DataStructuresCs
         }
         public IEnumerator<T> GetEnumerator()
         {
-            Node temp = first;
+            LinkedListNode<T> temp = first;
             while (temp != null)
             {
                 yield return temp.value;
@@ -248,16 +248,5 @@ namespace DataStructuresCs
             }
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        internal class Node
-        {
-            internal T value;
-            internal Node next;
-            public Node(T val) // O(1)
-            {
-                value = val;
-                next = null;
-            }
-        }
     }
 }

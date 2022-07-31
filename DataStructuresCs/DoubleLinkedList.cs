@@ -6,54 +6,54 @@ namespace DataStructuresCs
 {
     public class DoubleLinkedList<T> : IEnumerable<T>
     {
-        Node first;
-        Node last;
+        DoubleLinkedListNode<T> first;
+        DoubleLinkedListNode<T> last;
 
         public T First { get => first.value; }
         public T Last { get => last.value; }
         public int Count { get; private set; }
 
-        public DoubleLinkedList() // O(1)
+        public DoubleLinkedList()
         {
             first = null;
             last = null;
             Count = 0;
         }
-        public DoubleLinkedList(T item) => AddFirst(item); // O(1)
-        public DoubleLinkedList(params T[] items) // O(m)
+        public DoubleLinkedList(T item) => AddFirst(item);
+        public DoubleLinkedList(params T[] items)
         {
             for (int i = 0; i < items.Length; i++) AddLast(items[i]);
         }
-        public DoubleLinkedList(DoubleLinkedList<T> previousList) // O(1)
+        public DoubleLinkedList(DoubleLinkedList<T> previousList)
         {
             first = previousList.first;
             last = previousList.last;
             Count = previousList.Count;
         }
-        public DoubleLinkedList(LinkedList<T> previousList) => previousList.ToDoubleLinkedList(); // O(m)
+        public DoubleLinkedList(LinkedList<T> previousList) => previousList.ToDoubleLinkedList();
 
-        public void AddFirst(T item) // O(1)
+        public void AddFirst(T item)
         {
             if (first == null)
             {
-                first = new Node(item);
+                first = new DoubleLinkedListNode<T>(item);
                 last = first;
                 Count = 1;
             }
             else
             {
-                var temp = new Node(item) { next = first };
+                var temp = new DoubleLinkedListNode<T>(item) { next = first };
                 first.prev = temp;
                 first = temp;
                 Count++;
             }
         }
-        public void AddLast(T item) // O(1)
+        public void AddLast(T item)
         {
             if (last == null) AddFirst(item);
             else
             {
-                Node newLast = new Node(item);
+                DoubleLinkedListNode<T> newLast = new DoubleLinkedListNode<T>(item);
                 last.next = newLast;
                 newLast.prev = last;
                 last = newLast;
@@ -61,7 +61,7 @@ namespace DataStructuresCs
             }
         }
         public bool RemoveFirst() => RemoveFirst(out _);
-        public bool RemoveFirst(out T data) // O(1)
+        public bool RemoveFirst(out T data)
         {
             data = default;
             if (first == null) return false;
@@ -78,7 +78,7 @@ namespace DataStructuresCs
             return true;
         }
         public bool RemoveLast() => RemoveLast(out _);
-        public bool RemoveLast(out T data) // O(1)
+        public bool RemoveLast(out T data)
         {
             data = default;
             if (last == null) return false;
@@ -95,7 +95,7 @@ namespace DataStructuresCs
             return true;
         }
 
-        public LinkedList<T> ToLinkedList() // O(n)
+        public LinkedList<T> ToLinkedList()
         {
             LinkedList<T> list = new LinkedList<T>();
             var temp = first;
@@ -106,7 +106,7 @@ namespace DataStructuresCs
             }
             return list;
         }
-        public override string ToString() // O(n)
+        public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
             var temp = first;
@@ -118,9 +118,9 @@ namespace DataStructuresCs
             return sb.ToString();
         }
 
-        public IEnumerator<T> GetEnumerator() // O(n)
+        public IEnumerator<T> GetEnumerator()
         {
-            Node temp = first;
+            DoubleLinkedListNode<T> temp = first;
             while (temp != null)
             {
                 yield return temp.value;
@@ -128,18 +128,5 @@ namespace DataStructuresCs
             }
         }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-        internal class Node
-        {
-            internal T value;
-            internal Node next;
-            internal Node prev;
-            internal Node(T val)
-            {
-                value = val;
-                next = null;
-                prev = null;
-            }
-        }
     }
 }
