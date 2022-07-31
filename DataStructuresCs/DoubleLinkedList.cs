@@ -19,41 +19,41 @@ namespace DataStructuresCs
             last = null;
             Count = 0;
         }
-        public DoubleLinkedList(T val) => AddFirst(val); // O(1)
-        public DoubleLinkedList(params T[] vals) // O(m)
+        public DoubleLinkedList(T item) => AddFirst(item); // O(1)
+        public DoubleLinkedList(params T[] items) // O(m)
         {
-            for (int i = 0; i < vals.Length; i++) AddLast(vals[i]);
+            for (int i = 0; i < items.Length; i++) AddLast(items[i]);
         }
-        public DoubleLinkedList(DoubleLinkedList<T> prevList) // O(1)
+        public DoubleLinkedList(DoubleLinkedList<T> previousList) // O(1)
         {
-            first = prevList.first;
-            last = prevList.last;
-            Count = prevList.Count;
+            first = previousList.first;
+            last = previousList.last;
+            Count = previousList.Count;
         }
-        public DoubleLinkedList(LinkedList<T> prevList) => prevList.ToDoubleLinkedList(); // O(m)
+        public DoubleLinkedList(LinkedList<T> previousList) => previousList.ToDoubleLinkedList(); // O(m)
 
-        public void AddFirst(T val) // O(1)
+        public void AddFirst(T item) // O(1)
         {
             if (first == null)
             {
-                first = new Node(val);
+                first = new Node(item);
                 last = first;
                 Count = 1;
             }
             else
             {
-                var temp = new Node(val) { next = first };
+                var temp = new Node(item) { next = first };
                 first.prev = temp;
                 first = temp;
                 Count++;
             }
         }
-        public void AddLast(T val) // O(1)
+        public void AddLast(T item) // O(1)
         {
-            if (last == null) AddFirst(val);
+            if (last == null) AddFirst(item);
             else
             {
-                Node newLast = new Node(val);
+                Node newLast = new Node(item);
                 last.next = newLast;
                 newLast.prev = last;
                 last = newLast;

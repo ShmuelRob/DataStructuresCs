@@ -4,7 +4,8 @@
     {
         int Count { get; }
         bool IsEmpty { get; }
-        void Push(T data);
+        bool IsFull { get; }
+        void Push(T item);
         T Pop();
         bool Peek(out T data);
     }

@@ -7,6 +7,7 @@ namespace DSTests
     public class LinkedListTests
     {
         readonly GenericParameterHelper item = new GenericParameterHelper();
+        readonly GenericParameterHelper item2 = new GenericParameterHelper();
         readonly LinkedList<GenericParameterHelper> list = new LinkedList<GenericParameterHelper>();
         #region Add
         [TestMethod]
@@ -20,7 +21,6 @@ namespace DSTests
         [TestMethod]
         public void AddFirst2()
         {
-            var item2 = new GenericParameterHelper();
             list.AddFirst(item2);
             list.AddFirst(item);
             Assert.AreSame(item, list.First);
@@ -38,7 +38,6 @@ namespace DSTests
         [TestMethod]
         public void AddLast2()
         {
-            var item2 = new GenericParameterHelper();
             list.AddLast(item2);
             list.AddLast(item);
             Assert.AreSame(item2, list.First);
@@ -56,9 +55,7 @@ namespace DSTests
         [TestMethod]
         public void AddSome()
         {
-            var item2 = new GenericParameterHelper();
             list.Add(item, item, item2);
-
             Assert.AreSame(item, list.First);
             Assert.AreSame(item2, list.Last);
             Assert.AreEqual(3, list.Count);
@@ -82,8 +79,8 @@ namespace DSTests
         public void RemoveFirst3()
         {
             list.AddFirst(item);
-            Assert.IsTrue(list.RemoveFirst(out var item2));
-            Assert.AreSame(item, item2);
+            Assert.IsTrue(list.RemoveFirst(out var data));
+            Assert.AreSame(item, data);
             Assert.AreEqual(0, list.Count);
         }
         [TestMethod]
@@ -103,8 +100,8 @@ namespace DSTests
         public void RemoveLast3()
         {
             list.AddFirst(item);
-            list.RemoveLast(out var type2);
-            Assert.AreSame(item, type2);
+            list.RemoveLast(out var data);
+            Assert.AreSame(item, data);
             Assert.AreEqual(0, list.Count);
         }
         [TestMethod]
@@ -141,27 +138,27 @@ namespace DSTests
         [TestMethod]
         public void CopyTo1()
         {
-            var types = new GenericParameterHelper[3];
-            list.CopyTo(types);
-            foreach (var type in types)
-                Assert.IsNull(type);
+            var items = new GenericParameterHelper[3];
+            list.CopyTo(items);
+            foreach (var item in items)
+                Assert.IsNull(item);
         }
         [TestMethod]
         public void CopyTo2()
         {
-            var types = new GenericParameterHelper[3];
+            var items = new GenericParameterHelper[3];
             list.Add(item);
-            list.CopyTo(types);
-            Assert.IsNotNull(types[0]);
+            list.CopyTo(items);
+            Assert.IsNotNull(items[0]);
         }
         [TestMethod]
         public void CopyTo3()
         {
-            var types = new GenericParameterHelper[3];
+            var items = new GenericParameterHelper[3];
             list.Add(item);
             list.Add(item);
-            list.CopyTo(types);
-            Assert.IsNotNull(types[1]);
+            list.CopyTo(items);
+            Assert.IsNotNull(items[1]);
         }
         [TestMethod]
         public void CopyTo4()
@@ -193,7 +190,6 @@ namespace DSTests
         [TestMethod]
         public void Insert2()
         {
-            var item2 = new GenericParameterHelper();
             list.Add(item);
             list.Insert(0, item2);
             Assert.AreEqual(2, list.Count);
@@ -210,7 +206,6 @@ namespace DSTests
         [TestMethod]
         public void Insert4()
         {
-            var item2 = new GenericParameterHelper();
             list.Add(item);
             list.Add(item);
             list.Insert(1, item2);
@@ -252,17 +247,24 @@ namespace DSTests
             Assert.IsInstanceOfType(newList, typeof(DoubleLinkedList<GenericParameterHelper>));
         }
         [TestMethod]
-        public void CheckReadonly()
+        public void Readonly()
         {
             list.IsReadOnly = true;
             list.AddFirst(item);
             Assert.AreEqual(0, list.Count);
         }
         [TestMethod]
-        public void CheckEmpty()
+        public void Empty1()
         {
             Assert.IsTrue(list.IsEmpty);
             Assert.AreEqual(0, list.Count);
+        }
+        [TestMethod]
+        public void Empty2()
+        {
+            list.Add(item);
+            Assert.IsFalse(list.IsEmpty);
+            Assert.AreNotEqual(0, list.Count);
         }
         #endregion
     }

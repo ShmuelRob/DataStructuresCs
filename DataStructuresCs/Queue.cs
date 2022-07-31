@@ -46,7 +46,8 @@ namespace DataStructuresCs
         public int Count => queue.Count;
         public bool IsEmpty => queue.IsEmpty;
         public bool IsFull => queue.IsFull;
-        public bool DeQueue(out T removedItem) => queue.DeQueue(out removedItem);
         public bool EnQueue(T item) => queue.EnQueue(item);
+        public bool DeQueue(out T data) => queue.DeQueue(out data);
+        public bool Peek(out T data) => queue.Peek(out data);
     }
 }

@@ -5,25 +5,26 @@ namespace DataStructuresCs.Stack
     {
         readonly DoubleLinkedList<T> stack;
         readonly int? length;
-        public int Count => stack.Count; // O(1)
-        public bool IsEmpty => stack.Count == 0; // O(1)
 
-        public StackDoubleLinkedList() // O(1)
+        public StackDoubleLinkedList()
             => stack = new DoubleLinkedList<T>();
-        public StackDoubleLinkedList(int length) // O(1)
+        public StackDoubleLinkedList(int length)
             : this() => this.length = length;
 
-        public void Push(T data) //O(1)
+        public int Count => stack.Count;
+        public bool IsEmpty => stack.Count == 0;
+        public bool IsFull => length != null && stack.Count == length;
+        public void Push(T item)
         {
-            if (length == null || Count < length) stack.AddFirst(data);
+            if (length == null || Count < length) stack.AddFirst(item);
         }
-        public T Pop() // O(1)
+        public T Pop()
         {
             T data = stack.First;
             stack.RemoveFirst();
             return data;
         }
-        public bool Peek(out T data) // O(1)
+        public bool Peek(out T data)
         {
             data = default;
             if (IsEmpty) return false;

@@ -116,6 +116,30 @@ namespace DSTests
             Assert.IsFalse(stack.IsEmpty);
             Assert.AreEqual(1, stack.Count);
         }
+        [TestMethod]
+        public void AIsFull1()
+        {
+            ArrayInit();
+            for (int i = 0; i < 100; i++)
+                stack.Push(item);
+            Assert.IsFalse(stack.IsFull);
+        }
+        [TestMethod]
+        public void AIsFull2()
+        {
+            stack = new Stack<GenericParameterHelper>(StackImplementaion.Array, 5);
+            for (int i = 0; i < 3; i++)
+                stack.Push(item);
+            Assert.IsFalse(stack.IsFull);
+        }
+        [TestMethod]
+        public void AIsFull3()
+        {
+            stack = new Stack<GenericParameterHelper>(StackImplementaion.Array, 5);
+            for (int i = 0; i < 10; i++)
+                stack.Push(item);
+            Assert.IsTrue(stack.IsFull);
+        }
         #endregion
         #endregion
         #region LinkedList
@@ -214,6 +238,30 @@ namespace DSTests
             Assert.IsFalse(stack.IsEmpty);
             Assert.AreEqual(1, stack.Count);
         }
+        [TestMethod]
+        public void LIsFull1()
+        {
+            LinkedListInit();
+            for (int i = 0; i < 100; i++)
+                stack.Push(item);
+            Assert.IsFalse(stack.IsFull);
+        }
+        [TestMethod]
+        public void LIsFull2()
+        {
+            stack = new Stack<GenericParameterHelper>(StackImplementaion.LinkedList, 5);
+            for (int i = 0; i < 3; i++)
+                stack.Push(item);
+            Assert.IsFalse(stack.IsFull);
+        }
+        [TestMethod]
+        public void LIsFull3()
+        {
+            stack = new Stack<GenericParameterHelper>(StackImplementaion.LinkedList, 5);
+            for (int i = 0; i < 10; i++)
+                stack.Push(item);
+            Assert.IsTrue(stack.IsFull);
+        }
         #endregion
         #endregion
         #region DoubleLinkedList
@@ -310,6 +358,30 @@ namespace DSTests
             stack.Push(item);
             Assert.IsFalse(stack.IsEmpty);
             Assert.AreEqual(1, stack.Count);
+        }
+        [TestMethod]
+        public void DIsFull1()
+        {
+            DoubleLinkedListInit();
+            for (int i = 0; i < 100; i++)
+                stack.Push(item);
+            Assert.IsFalse(stack.IsFull);
+        }
+        [TestMethod]
+        public void DIsFull2()
+        {
+            stack = new Stack<GenericParameterHelper>(StackImplementaion.DoubleLinkedList, 5);
+            for (int i = 0; i < 3; i++)
+                stack.Push(item);
+            Assert.IsFalse(stack.IsFull);
+        }
+        [TestMethod]
+        public void DIsFull3()
+        {
+            stack = new Stack<GenericParameterHelper>(StackImplementaion.DoubleLinkedList, 5);
+            for (int i = 0; i < 10; i++)
+                stack.Push(item);
+            Assert.IsTrue(stack.IsFull);
         }
         #endregion
         #endregion

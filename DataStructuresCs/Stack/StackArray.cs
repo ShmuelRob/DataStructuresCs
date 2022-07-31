@@ -8,30 +8,30 @@ namespace DataStructuresCs.Stack
         readonly bool canGrow;
         const int ARRAY_LENGTH = 17;
 
-        public int Count { get; private set; }
-        public bool IsEmpty => Count == 0; // O(1)
-
-        public StackArray(int length) => stack = new T[length]; // O(1)
-        public StackArray() // O(1)
+        public StackArray(int length) => stack = new T[length];
+        public StackArray()
         {
             stack = new T[ARRAY_LENGTH];
             canGrow = true;
         }
 
-        public void Push(T data) // O(1)
+        public int Count { get; private set; }
+        public bool IsEmpty => Count == 0;
+        public bool IsFull => !canGrow && Count == stack.Length;
+        public void Push(T item)
         {
             if (Count == stack.Length && !canGrow) return;
-            stack[ind++] = data;
+            stack[ind++] = item;
             Count++;
             if (Count == stack.Length && canGrow) ReBuild();
         }
-        public T Pop() // O(1)
+        public T Pop()
         {
             if (IsEmpty) return default;
             Count--;
             return stack[--ind];
         }
-        public bool Peek(out T data) // O(1)
+        public bool Peek(out T data)
         {
             data = default;
             if (IsEmpty) return false;
@@ -39,7 +39,7 @@ namespace DataStructuresCs.Stack
             return true;
         }
 
-        void ReBuild() // O(n)
+        void ReBuild()
         {
             T[] newStack = new T[stack.Length * 2];
             for (int i = 0; i < stack.Length; i++) newStack[i] = stack[i];

@@ -2,18 +2,30 @@
 {
     internal class QueueDoubleLinkedList<T> : IQueue<T>
     {
-        public bool IsEmpty => throw new System.NotImplementedException();
+        readonly LinkedList<T> queue;
+        readonly int? length;
 
-        public int Count => throw new System.NotImplementedException();
+        public QueueDoubleLinkedList()
+        {
 
-        public bool IsFull => throw new System.NotImplementedException();
+        }
+        public QueueDoubleLinkedList(int length)
+        {
+            this.length = length;
+        }
 
-        public bool DeQueue(out T removedItem)
+        public int Count => queue.Count;
+        public bool IsEmpty => queue.IsEmpty;
+        public bool IsFull => length != null && queue.Count == length;
+        public bool EnQueue(T item)
         {
             throw new System.NotImplementedException();
         }
-
-        public bool EnQueue(T item)
+        public bool DeQueue(out T data)
+        {
+            throw new System.NotImplementedException();
+        }
+        public bool Peek(out T data)
         {
             throw new System.NotImplementedException();
         }

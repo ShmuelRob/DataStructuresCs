@@ -7,6 +7,7 @@ namespace DSTests
     public class DoubleLinkedListTests
     {
         readonly GenericParameterHelper item = new GenericParameterHelper();
+        readonly GenericParameterHelper item2 = new GenericParameterHelper();
         readonly DoubleLinkedList<GenericParameterHelper> list = new DoubleLinkedList<GenericParameterHelper>();
         #region Add
         [TestMethod]
@@ -21,7 +22,6 @@ namespace DSTests
         public void AddFirst2()
         {
             list.AddFirst(item);
-            var item2 = new GenericParameterHelper();
             list.AddFirst(item2);
             Assert.AreEqual(2, list.Count);
             Assert.AreSame(item2, list.First);
@@ -39,7 +39,6 @@ namespace DSTests
         public void AddLast2()
         {
             list.AddLast(item);
-            var item2 = new GenericParameterHelper();
             list.AddLast(item2);
             Assert.AreEqual(2, list.Count);
             Assert.AreSame(item, list.First);
@@ -64,8 +63,8 @@ namespace DSTests
         public void RemoveFirst3()
         {
             list.AddFirst(item);
-            Assert.IsTrue(list.RemoveFirst(out var item2));
-            Assert.AreSame(item, item2);
+            Assert.IsTrue(list.RemoveFirst(out var data));
+            Assert.AreSame(item, data);
             Assert.AreEqual(0, list.Count);
         }
         [TestMethod]
@@ -85,8 +84,8 @@ namespace DSTests
         public void RemoveLast3()
         {
             list.AddFirst(item);
-            list.RemoveLast(out var type2);
-            Assert.AreSame(item, type2);
+            list.RemoveLast(out var data);
+            Assert.AreSame(item, data);
             Assert.AreEqual(0, list.Count);
         }
         #endregion

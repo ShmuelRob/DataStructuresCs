@@ -21,39 +21,39 @@ namespace DataStructuresCs
             first = null;
             last = null;
         }
-        public LinkedList(T val) => AddFirst(val); // O(1)
-        public LinkedList(params T[] vals) // O(m)
+        public LinkedList(T item) => AddFirst(item); // O(1)
+        public LinkedList(params T[] items) // O(m)
         {
-            for (int i = 0; i < vals.Length; i++) AddLast(vals[i]);
+            for (int i = 0; i < items.Length; i++) AddLast(items[i]);
         }
-        public LinkedList(LinkedList<T> prevList) // O(1)
+        public LinkedList(LinkedList<T> previousList) // O(1)
         {
-            first = prevList.first;
-            last = prevList.last;
+            first = previousList.first;
+            last = previousList.last;
         }
 
-        public void AddFirst(T val) // O(1)
+        public void AddFirst(T item) // O(1)
         {
             if (IsReadOnly) return;
             if (last == null)
             {
-                first = new Node(val);
+                first = new Node(item);
                 last = first;
             }
             else
             {
-                var temp = new Node(val) { next = first };
+                var temp = new Node(item) { next = first };
                 first = temp;
             }
             Count++;
         }
-        public void AddLast(T val) // O(1)
+        public void AddLast(T item) // O(1)
         {
             if (IsReadOnly) return;
-            if (last == null) AddFirst(val);
+            if (last == null) AddFirst(item);
             else
             {
-                Node newLast = new Node(val);
+                Node newLast = new Node(item);
                 last.next = newLast;
                 last = newLast;
                 Count++;

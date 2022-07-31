@@ -45,9 +45,9 @@ namespace DataStructuresCs
 
         public int Count => stack.Count;
         public bool IsEmpty => stack.IsEmpty;
-
-        public bool Peek(out T data) => stack.Peek(out data);
+        public bool IsFull => stack.IsFull;
+        public void Push(T item) => stack.Push(item);
         public T Pop() => stack.Pop();
-        public void Push(T data) => stack.Push(data);
+        public bool Peek(out T data) => stack.Peek(out data);
     }
 }

@@ -6,6 +6,7 @@
         bool IsEmpty { get; }
         bool IsFull { get; }
         bool EnQueue(T item);
-        bool DeQueue(out T removedItem);
+        bool DeQueue(out T data);
+        bool Peek(out T data);
     }
 }
