@@ -6,28 +6,33 @@
         readonly int? length;
 
         public QueueDoubleLinkedList()
-        {
-
-        }
+            => queue = new LinkedList<T>();
         public QueueDoubleLinkedList(int length)
-        {
-            this.length = length;
-        }
+            : this() => this.length = length;
 
         public int Count => queue.Count;
         public bool IsEmpty => queue.IsEmpty;
         public bool IsFull => length != null && queue.Count == length;
         public bool EnQueue(T item)
         {
-            throw new System.NotImplementedException();
+            if (IsFull) return false;
+            queue.AddLast(item);
+            return true;
         }
         public bool DeQueue(out T data)
         {
-            throw new System.NotImplementedException();
+            data = default;
+            if (queue.Count <= 0) return false;
+            data = queue.First;
+            queue.RemoveFirst();
+            return true;
         }
         public bool Peek(out T data)
         {
-            throw new System.NotImplementedException();
+            data = default;
+            if (queue.Count <= 0) return false;
+            data = queue.First;
+            return true;
         }
     }
 }

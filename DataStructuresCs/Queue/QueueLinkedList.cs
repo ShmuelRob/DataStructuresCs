@@ -6,9 +6,9 @@ namespace DataStructuresCs.Queue
         readonly LinkedList<T> queue;
         readonly int? length;
 
-        public QueueLinkedList() // O(1)
+        public QueueLinkedList()
             => queue = new LinkedList<T>();
-        public QueueLinkedList(int length) //
+        public QueueLinkedList(int length)
             : this() => this.length = length;
 
         public int Count => queue.Count;
@@ -16,15 +16,24 @@ namespace DataStructuresCs.Queue
         public bool IsFull => length != null && queue.Count == length;
         public bool EnQueue(T item)
         {
-            throw new System.NotImplementedException();
+            if (IsFull) return false;
+            queue.AddLast(item);
+            return true;
         }
         public bool DeQueue(out T data)
         {
-            throw new System.NotImplementedException();
+            data = default;
+            if (queue.Count <= 0) return false;
+            data = queue.First;
+            queue.RemoveFirst();
+            return true;
         }
         public bool Peek(out T data)
         {
-            throw new System.NotImplementedException();
+            data = default;
+            if (queue.Count <= 0) return false;
+            data = queue.First;
+            return true;
         }
     }
 }

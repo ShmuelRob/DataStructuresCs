@@ -134,9 +134,9 @@ namespace DSTests
         [TestMethod]
         public void AIsFull1()
         {
-            var length = 3;
+            var length = 4;
             queue = new Queue<GenericParameterHelper>(QueueImplementaion.Array, length);
-            for (int i = 0; i < length + 1; i++)
+            for (int i = 0; i < length * 2; i++)
                 queue.EnQueue(item);
             Assert.IsTrue(queue.IsFull);
             Assert.AreEqual(length, queue.Count);

@@ -25,7 +25,7 @@
         public bool EnQueue(T item)
         {
             if (IsFull) return false;
-            if (firstInd == lastInd && !canGrow) ReBuild();
+            if (firstInd == lastInd && canGrow) ReBuild();
             if (IsEmpty) lastInd = firstInd = 0;
             queue[lastInd] = item;
             lastInd = (lastInd + 1) % queue.Length;
@@ -46,7 +46,7 @@
         {
             data = default;
             if (IsEmpty) return false;
-            data = queue[lastInd % queue.Length];
+            data = queue[firstInd];
             return true;
         }
 
