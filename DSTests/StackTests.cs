@@ -19,7 +19,6 @@ namespace DSTests
                 stack.Push(item);
             Assert.AreEqual(Math.Abs(limitLength), stack.Count);
         }
-
         #region Array
         void ArrayInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.Array);
         #region Limited
