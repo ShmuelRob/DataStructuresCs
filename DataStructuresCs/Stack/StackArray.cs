@@ -1,4 +1,5 @@
-﻿namespace DataStructuresCs.Stack
+﻿
+namespace DataStructuresCs.Stack
 {
     internal class StackArray<T> : IStack<T>
     {
@@ -22,7 +23,7 @@
             if (Count == stack.Length && !canGrow) return;
             stack[ind++] = data;
             Count++;
-            if (Count == stack.Length) ReBuild();
+            if (Count == stack.Length && canGrow) ReBuild();
         }
         public T Pop() // O(1)
         {
@@ -40,9 +41,9 @@
 
         void ReBuild() // O(n)
         {
-            T[] newArr = new T[stack.Length * 2];
-            for (int i = 0; i < stack.Length; i++) newArr[i] = stack[i];
-            stack = newArr;
+            T[] newStack = new T[stack.Length * 2];
+            for (int i = 0; i < stack.Length; i++) newStack[i] = stack[i];
+            stack = newStack;
         }
     }
 }

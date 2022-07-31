@@ -6,7 +6,7 @@
 
         public int Count => throw new System.NotImplementedException();
 
-        public bool IsFull => throw new NotImplementedException();
+        public bool IsFull => throw new System.NotImplementedException();
 
         public bool DeQueue(out T removedItem)
         {
@@ -17,7 +17,5 @@
         {
             throw new System.NotImplementedException();
         }
-    }
-    {
     }
 }

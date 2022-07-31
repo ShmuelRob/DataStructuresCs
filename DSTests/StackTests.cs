@@ -1,6 +1,7 @@
 ﻿using DataStructuresCs;
 using DataStructuresCs.Stack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace DSTests
 {
@@ -10,8 +11,29 @@ namespace DSTests
         Stack<GenericParameterHelper> stack;
         readonly GenericParameterHelper item = new GenericParameterHelper();
         readonly GenericParameterHelper item2 = new GenericParameterHelper();
+
+        void Limit(StackImplementaion imp, int limitLength)
+        {
+            stack = new Stack<GenericParameterHelper>(imp, limitLength);
+            for (int i = 0; i < Math.Abs(limitLength) * 2; i++)
+                stack.Push(item);
+            Assert.AreEqual(Math.Abs(limitLength), stack.Count);
+        }
+
         #region Array
         void ArrayInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.Array);
+        #region Limited
+        [TestMethod]
+        public void ALimitedPos() => Limit(StackImplementaion.Array, 4);
+        [TestMethod]
+        public void ALimitedPos1() => Limit(StackImplementaion.Array, 1);  
+        [TestMethod]
+        public void ALimited0() => Limit(StackImplementaion.Array, 0);
+        [TestMethod]
+        public void ALimitedMin1() => Limit(StackImplementaion.Array, -1);
+        [TestMethod]
+        public void ALimitedMin() => Limit(StackImplementaion.Array, -4);
+        #endregion
         #region Peek
         [TestMethod]
         public void APeek1()
@@ -97,7 +119,19 @@ namespace DSTests
         #endregion
         #endregion
         #region LinkedList
-        void LinkedListInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.linkedList);
+        void LinkedListInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.LinkedList);
+        #region Limited
+        [TestMethod]
+        public void LLimitedPos() => Limit(StackImplementaion.LinkedList, 4);
+        [TestMethod]
+        public void LLimitedPos1() => Limit(StackImplementaion.LinkedList, 1);
+        [TestMethod]
+        public void LLimited0() => Limit(StackImplementaion.LinkedList, 0);
+        [TestMethod]
+        public void LLimitedMin1() => Limit(StackImplementaion.LinkedList, -1);
+        [TestMethod]
+        public void LLimitedMin() => Limit(StackImplementaion.LinkedList, -4);
+        #endregion
         #region Peek
         [TestMethod]
         public void LPeek1()
@@ -183,7 +217,19 @@ namespace DSTests
         #endregion
         #endregion
         #region DoubleLinkedList
-        void DoubleLinkedListInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.doubleLinkedList);
+        void DoubleLinkedListInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.DoubleLinkedList);
+        #region Limited
+        [TestMethod]
+        public void DLimitedPos() => Limit(StackImplementaion.DoubleLinkedList, 4);
+        [TestMethod]
+        public void DLimitedPos1() => Limit(StackImplementaion.DoubleLinkedList, 1);
+        [TestMethod]
+        public void DLimited0() => Limit(StackImplementaion.DoubleLinkedList, 0);
+        [TestMethod]
+        public void DLimitedMin1() => Limit(StackImplementaion.DoubleLinkedList, -1);
+        [TestMethod]
+        public void DLimitedMin() => Limit(StackImplementaion.DoubleLinkedList, -4);
+        #endregion
         #region Peek
         [TestMethod]
         public void DPeek1()

@@ -1,24 +1,21 @@
-﻿namespace DataStructuresCs.Stack
+﻿
+namespace DataStructuresCs.Stack
 {
     internal class StackDoubleLinkedList<T> : IStack<T>
     {
         readonly DoubleLinkedList<T> stack;
-        readonly int length;
+        readonly int? length;
         public int Count => stack.Count; // O(1)
         public bool IsEmpty => stack.Count == 0; // O(1)
-        public StackDoubleLinkedList()
-        {
 
-        }
+        public StackDoubleLinkedList() // O(1)
+            => stack = new DoubleLinkedList<T>();
         public StackDoubleLinkedList(int length) // O(1)
-        {
-            this.length = length;
-            stack = new DoubleLinkedList<T>();
-        }
+            : this() => this.length = length;
 
         public void Push(T data) //O(1)
         {
-            if (Count < length) stack.AddFirst(data);
+            if (length == null || Count < length) stack.AddFirst(data);
         }
         public T Pop() // O(1)
         {

@@ -1,4 +1,5 @@
 ﻿using DataStructuresCs.Queue;
+using System;
 
 namespace DataStructuresCs
 {
@@ -7,19 +8,37 @@ namespace DataStructuresCs
         readonly IQueue<T> queue;
 
         public Queue() : this(QueueImplementaion.Array) { }
+        public Queue(int length) 
+            : this(QueueImplementaion.Array, length) { }
         public Queue(QueueImplementaion implementaion)
         {
             switch (implementaion)
             {
-                case QueueImplementaion.linkedList:
+                case QueueImplementaion.LinkedList:
                     queue = new QueueLinkedList<T>();
                     break;
-                case QueueImplementaion.doubleLinkedList:
+                case QueueImplementaion.DoubleLinkedList:
                     queue = new QueueDoubleLinkedList<T>();
                     break;
                 case QueueImplementaion.Array:
                 default:
                     queue = new QueueArray<T>();
+                    break;
+            }
+        }
+        public Queue(QueueImplementaion implementaion, int length)
+        {
+            switch (implementaion)
+            {
+                case QueueImplementaion.LinkedList:
+                    queue = new QueueLinkedList<T>(Math.Abs(length));
+                    break;
+                case QueueImplementaion.DoubleLinkedList:
+                    queue = new QueueDoubleLinkedList<T>(Math.Abs(length));
+                    break;
+                case QueueImplementaion.Array:
+                default:
+                    queue = new QueueArray<T>(Math.Abs(length));
                     break;
             }
         }

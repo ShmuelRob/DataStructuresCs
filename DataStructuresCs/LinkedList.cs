@@ -210,7 +210,7 @@ namespace DataStructuresCs
         }
         public DoubleLinkedList<T> ToDoubleLinkedList() // O(n)
         {
-            DoubleLinkedList<T> list = new DoubleLinkedList<T>(this);
+            DoubleLinkedList<T> list = new DoubleLinkedList<T>();
             var temp = first;
             while (temp != null)
             {

@@ -1,15 +1,22 @@
-﻿namespace DataStructuresCs.Stack
+﻿
+namespace DataStructuresCs.Stack
 {
     internal class StackLinkedList<T> : IStack<T>
     {
         readonly LinkedList<T> stack;
+        readonly int? length;
         public int Count => stack.Count; // O(1)
         public bool IsEmpty => stack.IsEmpty; // O(1)
 
-        public StackLinkedList() => stack = new LinkedList<T>(); // O(1)
-        public StackLinkedList(int length) => stack = new LinkedList<T>(); // O(1)
+        public StackLinkedList()
+            => stack = new LinkedList<T>(); // O(1)
+        public StackLinkedList(int length) // O(1)
+            : this() => this.length = length;
 
-        public void Push(T data) => stack.AddFirst(data); // O(1)
+        public void Push(T data) // O(1)
+        {
+            if (length == null || Count < length) stack.AddFirst(data);
+        }
         public T Pop() // O(1)
         {
             stack.RemoveFirst(out T data);

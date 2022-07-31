@@ -1,4 +1,5 @@
 ﻿using DataStructuresCs.Stack;
+using System;
 
 namespace DataStructuresCs
 {
@@ -7,15 +8,16 @@ namespace DataStructuresCs
         readonly IStack<T> stack;
 
         public Stack() : this(StackImplementaion.Array) { }
-        public Stack(int length) : this(StackImplementaion.Array, length) { }
+        public Stack(int length)
+            : this(StackImplementaion.Array, length) { }
         public Stack(StackImplementaion implementaion)
         {
             switch (implementaion)
             {
-                case StackImplementaion.linkedList:
+                case StackImplementaion.LinkedList:
                     stack = new StackLinkedList<T>();
                     break;
-                case StackImplementaion.doubleLinkedList:
+                case StackImplementaion.DoubleLinkedList:
                     stack = new StackDoubleLinkedList<T>();
                     break;
                 case StackImplementaion.Array:
@@ -28,15 +30,15 @@ namespace DataStructuresCs
         {
             switch (implementaion)
             {
-                case StackImplementaion.linkedList:
-                    stack = new StackLinkedList<T>(length);
+                case StackImplementaion.LinkedList:
+                    stack = new StackLinkedList<T>(Math.Abs(length));
                     break;
-                case StackImplementaion.doubleLinkedList:
-                    stack = new StackDoubleLinkedList<T>(length);
+                case StackImplementaion.DoubleLinkedList:
+                    stack = new StackDoubleLinkedList<T>(Math.Abs(length));
                     break;
                 case StackImplementaion.Array:
                 default:
-                    stack = new StackArray<T>(length);
+                    stack = new StackArray<T>(Math.Abs(length));
                     break;
             }
         }
