@@ -9,6 +9,7 @@ namespace DSTests
         readonly GenericParameterHelper item = new GenericParameterHelper();
         readonly GenericParameterHelper item2 = new GenericParameterHelper();
         readonly DoubleLinkedList<GenericParameterHelper> list = new DoubleLinkedList<GenericParameterHelper>();
+
         #region Add
         [TestMethod]
         public void AddFirst1()
