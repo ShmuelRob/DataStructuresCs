@@ -1,10 +1,7 @@
-﻿using DataStructuresCs.BST;
+﻿using DataStructuresCs.Nodes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataStructuresCs
 {
@@ -75,10 +72,10 @@ namespace DataStructuresCs
             isRemoved = false;
             if (parent == null) return parent;
 
-            if (parent.value.CompareTo(val) > 0) parent.left = Remove(parent.left, val, out isRemoved);
+            if (parent.value.CompareTo(val) > 0)
+                parent.left = Remove(parent.left, val, out isRemoved);
             else if (parent.value.CompareTo(val) < 0)
                 parent.right = Remove(parent.right, val, out isRemoved);
-
             else
             {
                 if (parent.left == null)
