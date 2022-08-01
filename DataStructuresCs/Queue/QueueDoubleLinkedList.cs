@@ -7,8 +7,7 @@ namespace DataStructuresCs.Queue
         readonly LinkedList<T> queue;
         readonly int? length;
 
-        public QueueDoubleLinkedList()
-            => queue = new LinkedList<T>();
+        public QueueDoubleLinkedList() => queue = new LinkedList<T>();
         public QueueDoubleLinkedList(int length)
             : this() => this.length = Math.Abs(length);
 

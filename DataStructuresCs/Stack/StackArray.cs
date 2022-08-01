@@ -5,10 +5,11 @@ namespace DataStructuresCs.Stack
 {
     public class StackArray<T> : IStack<T>
     {
+        const int ARRAY_LENGTH = 17;
+
         T[] stack;
         int ind;
         readonly bool canGrow;
-        const int ARRAY_LENGTH = 17;
 
         public StackArray(int length) => stack = new T[Math.Abs(length)];
         public StackArray()

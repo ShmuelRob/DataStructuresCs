@@ -7,8 +7,7 @@ namespace DataStructuresCs.Stack
         readonly DoubleLinkedList<T> stack;
         readonly int? length;
 
-        public StackDoubleLinkedList()
-            => stack = new DoubleLinkedList<T>();
+        public StackDoubleLinkedList() => stack = new DoubleLinkedList<T>();
         public StackDoubleLinkedList(int length)
             : this() => this.length = Math.Abs(length);
 

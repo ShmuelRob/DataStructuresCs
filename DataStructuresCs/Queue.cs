@@ -17,6 +17,7 @@ namespace DataStructuresCs
         public bool EnQueue(T item) => queue.EnQueue(item);
         public T DeQueue() => queue.DeQueue();
         public T Peek() => queue.Peek();
+
         public void ChangeStrategy(IQueue<T> newQueue)
         {
             while (!queue.IsEmpty)

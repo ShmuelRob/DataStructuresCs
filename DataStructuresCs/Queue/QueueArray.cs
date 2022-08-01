@@ -4,11 +4,11 @@ namespace DataStructuresCs.Queue
 {
     public class QueueArray<T> : IQueue<T>
     {
+        const int QUEUE_CAPACITY = 17;
         T[] queue;
         int firstInd;
         int lastInd;
         readonly bool canGrow;
-        const int QUEUE_CAPACITY = 17;
 
         public QueueArray() : this(QUEUE_CAPACITY)
         {

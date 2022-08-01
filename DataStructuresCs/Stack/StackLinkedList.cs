@@ -7,8 +7,7 @@ namespace DataStructuresCs.Stack
         readonly LinkedList<T> stack;
         readonly int? length;
 
-        public StackLinkedList()
-            => stack = new LinkedList<T>();
+        public StackLinkedList() => stack = new LinkedList<T>();
         public StackLinkedList(int length)
             : this() => this.length = Math.Abs(length);
 
