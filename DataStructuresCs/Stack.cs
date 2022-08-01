@@ -1,5 +1,4 @@
 ﻿using DataStructuresCs.Stack;
-using System;
 
 namespace DataStructuresCs
 {
