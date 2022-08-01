@@ -54,6 +54,7 @@
     <Compile Include="DoubleLinkedListTests.cs" />
     <Compile Include="StackTests.cs" />
     <Compile Include="QueueTests.cs" />
+    <Compile Include="BstTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
