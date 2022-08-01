@@ -17,7 +17,7 @@ namespace DataStructuresCs
         public void Push(T item) => stack.Push(item);
         public T Pop() => stack.Pop();
         public bool Peek(out T data) => stack.Peek(out data);
-        public void ChangeState(IStack<T> newStack)
+        public void ChangeStrategy(IStack<T> newStack)
         {
             IStack<T> tempStack = new Stack<T>();
             while (!stack.IsEmpty) tempStack.Push(stack.Pop());
