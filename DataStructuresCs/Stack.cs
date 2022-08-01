@@ -4,7 +4,7 @@ namespace DataStructuresCs
 {
     public class Stack<T> : IStack<T>
     {
-        readonly IStack<T> stack;
+        IStack<T> stack;
 
         public Stack() : this(new StackArray<T>()) { }
         public Stack(int length)
@@ -17,5 +17,12 @@ namespace DataStructuresCs
         public void Push(T item) => stack.Push(item);
         public T Pop() => stack.Pop();
         public bool Peek(out T data) => stack.Peek(out data);
+        public void ChangeState(IStack<T> newStack)
+        {
+            IStack<T> tempStack = new Stack<T>();
+            while (!stack.IsEmpty) tempStack.Push(stack.Pop());
+            while (!newStack.IsEmpty) newStack.Push(tempStack.Pop());
+            stack = newStack;
+        }
     }
 }
