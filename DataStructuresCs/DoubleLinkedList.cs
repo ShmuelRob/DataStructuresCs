@@ -95,7 +95,6 @@ namespace DataStructuresCs
             Count--;
             return true;
         }
-
         public LinkedList<T> ToLinkedList()
         {
             LinkedList<T> list = new LinkedList<T>();
