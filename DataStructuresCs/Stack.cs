@@ -7,41 +7,10 @@ namespace DataStructuresCs
     {
         readonly IStack<T> stack;
 
-        public Stack() : this(StackImplementaion.Array) { }
+        public Stack() : this(new StackArray<T>()) { }
         public Stack(int length)
-            : this(StackImplementaion.Array, length) { }
-        public Stack(StackImplementaion implementaion)
-        {
-            switch (implementaion)
-            {
-                case StackImplementaion.LinkedList:
-                    stack = new StackLinkedList<T>();
-                    break;
-                case StackImplementaion.DoubleLinkedList:
-                    stack = new StackDoubleLinkedList<T>();
-                    break;
-                case StackImplementaion.Array:
-                default:
-                    stack = new StackArray<T>();
-                    break;
-            }
-        }
-        public Stack(StackImplementaion implementaion, int length)
-        {
-            switch (implementaion)
-            {
-                case StackImplementaion.LinkedList:
-                    stack = new StackLinkedList<T>(Math.Abs(length));
-                    break;
-                case StackImplementaion.DoubleLinkedList:
-                    stack = new StackDoubleLinkedList<T>(Math.Abs(length));
-                    break;
-                case StackImplementaion.Array:
-                default:
-                    stack = new StackArray<T>(Math.Abs(length));
-                    break;
-            }
-        }
+            : this(new StackArray<T>(length)) { }
+        public Stack(IStack<T> stack) => this.stack = stack;
 
         public int Count => stack.Count;
         public bool IsEmpty => stack.IsEmpty;

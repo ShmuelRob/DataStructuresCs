@@ -1,7 +1,8 @@
-﻿
+﻿using System;
+
 namespace DataStructuresCs.Queue
 {
-    internal class QueueLinkedList<T> : IQueue<T>
+    public class QueueLinkedList<T> : IQueue<T>
     {
         readonly LinkedList<T> queue;
         readonly int? length;
@@ -9,7 +10,7 @@ namespace DataStructuresCs.Queue
         public QueueLinkedList()
             => queue = new LinkedList<T>();
         public QueueLinkedList(int length)
-            : this() => this.length = length;
+            : this() => this.length = Math.Abs(length);
 
         public int Count => queue.Count;
         public bool IsEmpty => queue.IsEmpty;

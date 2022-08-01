@@ -12,26 +12,26 @@ namespace DSTests
         readonly GenericParameterHelper item = new GenericParameterHelper();
         readonly GenericParameterHelper item2 = new GenericParameterHelper();
 
-        void Limit(StackImplementaion imp, int limitLength)
+        void Limit(IStack<GenericParameterHelper> stack, int limitLength)
         {
-            stack = new Stack<GenericParameterHelper>(imp, limitLength);
+            stack = new Stack<GenericParameterHelper>(stack);
             for (int i = 0; i < Math.Abs(limitLength) * 2; i++)
                 stack.Push(item);
             Assert.AreEqual(Math.Abs(limitLength), stack.Count);
         }
         #region Array
-        void ArrayInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.Array);
+        void ArrayInit() => stack = new Stack<GenericParameterHelper>(new StackArray<GenericParameterHelper>());
         #region Limited
         [TestMethod]
-        public void ALimitedPos() => Limit(StackImplementaion.Array, 4);
+        public void ALimitedPos() => Limit(new StackArray<GenericParameterHelper>(4), 4);
         [TestMethod]
-        public void ALimitedPos1() => Limit(StackImplementaion.Array, 1);  
+        public void ALimitedPos1() => Limit(new StackArray<GenericParameterHelper>(1), 1);  
         [TestMethod]
-        public void ALimited0() => Limit(StackImplementaion.Array, 0);
+        public void ALimited0() => Limit(new StackArray<GenericParameterHelper>(0), 0);
         [TestMethod]
-        public void ALimitedMin1() => Limit(StackImplementaion.Array, -1);
+        public void ALimitedMin1() => Limit(new StackArray<GenericParameterHelper>(-1), -1);
         [TestMethod]
-        public void ALimitedMin() => Limit(StackImplementaion.Array, -4);
+        public void ALimitedMin() => Limit(new StackArray<GenericParameterHelper>(-4), -4);
         #endregion
         #region Peek
         [TestMethod]
@@ -126,7 +126,7 @@ namespace DSTests
         [TestMethod]
         public void AIsFull2()
         {
-            stack = new Stack<GenericParameterHelper>(StackImplementaion.Array, 5);
+            stack = new Stack<GenericParameterHelper>(new StackArray<GenericParameterHelper>(5));
             for (int i = 0; i < 3; i++)
                 stack.Push(item);
             Assert.IsFalse(stack.IsFull);
@@ -134,7 +134,7 @@ namespace DSTests
         [TestMethod]
         public void AIsFull3()
         {
-            stack = new Stack<GenericParameterHelper>(StackImplementaion.Array, 5);
+            stack = new Stack<GenericParameterHelper>(new StackArray<GenericParameterHelper>(5));
             for (int i = 0; i < 10; i++)
                 stack.Push(item);
             Assert.IsTrue(stack.IsFull);
@@ -142,18 +142,18 @@ namespace DSTests
         #endregion
         #endregion
         #region LinkedList
-        void LinkedListInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.LinkedList);
+        void LinkedListInit() => stack = new Stack<GenericParameterHelper>(new StackLinkedList<GenericParameterHelper>());
         #region Limited
         [TestMethod]
-        public void LLimitedPos() => Limit(StackImplementaion.LinkedList, 4);
+        public void LLimitedPos() => Limit(new StackLinkedList<GenericParameterHelper>(4), 4);
         [TestMethod]
-        public void LLimitedPos1() => Limit(StackImplementaion.LinkedList, 1);
+        public void LLimitedPos1() => Limit(new StackLinkedList<GenericParameterHelper>(1), 1);
         [TestMethod]
-        public void LLimited0() => Limit(StackImplementaion.LinkedList, 0);
+        public void LLimited0() => Limit(new StackLinkedList<GenericParameterHelper>(0), 0);
         [TestMethod]
-        public void LLimitedMin1() => Limit(StackImplementaion.LinkedList, -1);
+        public void LLimitedMin1() => Limit(new StackLinkedList<GenericParameterHelper>(-1), -1);
         [TestMethod]
-        public void LLimitedMin() => Limit(StackImplementaion.LinkedList, -4);
+        public void LLimitedMin() => Limit(new StackLinkedList<GenericParameterHelper>(-4), -4);
         #endregion
         #region Peek
         [TestMethod]
@@ -248,7 +248,7 @@ namespace DSTests
         [TestMethod]
         public void LIsFull2()
         {
-            stack = new Stack<GenericParameterHelper>(StackImplementaion.LinkedList, 5);
+            stack = new Stack<GenericParameterHelper>(new StackLinkedList<GenericParameterHelper>(5));
             for (int i = 0; i < 3; i++)
                 stack.Push(item);
             Assert.IsFalse(stack.IsFull);
@@ -256,7 +256,7 @@ namespace DSTests
         [TestMethod]
         public void LIsFull3()
         {
-            stack = new Stack<GenericParameterHelper>(StackImplementaion.LinkedList, 5);
+            stack = new Stack<GenericParameterHelper>(new StackLinkedList<GenericParameterHelper>(5));
             for (int i = 0; i < 10; i++)
                 stack.Push(item);
             Assert.IsTrue(stack.IsFull);
@@ -264,18 +264,19 @@ namespace DSTests
         #endregion
         #endregion
         #region DoubleLinkedList
-        void DoubleLinkedListInit() => stack = new Stack<GenericParameterHelper>(StackImplementaion.DoubleLinkedList);
+        void DoubleLinkedListInit() => stack = 
+            new Stack<GenericParameterHelper>(new StackDoubleLinkedList<GenericParameterHelper>());
         #region Limited
         [TestMethod]
-        public void DLimitedPos() => Limit(StackImplementaion.DoubleLinkedList, 4);
+        public void DLimitedPos() => Limit(new StackDoubleLinkedList<GenericParameterHelper>(4), 4);
         [TestMethod]
-        public void DLimitedPos1() => Limit(StackImplementaion.DoubleLinkedList, 1);
+        public void DLimitedPos1() => Limit(new StackDoubleLinkedList<GenericParameterHelper>(1), 1);
         [TestMethod]
-        public void DLimited0() => Limit(StackImplementaion.DoubleLinkedList, 0);
+        public void DLimited0() => Limit(new StackDoubleLinkedList<GenericParameterHelper>(0), 0);
         [TestMethod]
-        public void DLimitedMin1() => Limit(StackImplementaion.DoubleLinkedList, -1);
+        public void DLimitedMin1() => Limit(new StackDoubleLinkedList<GenericParameterHelper>(-1), -1);
         [TestMethod]
-        public void DLimitedMin() => Limit(StackImplementaion.DoubleLinkedList, -4);
+        public void DLimitedMin() => Limit(new StackDoubleLinkedList<GenericParameterHelper>(-4), -4);
         #endregion
         #region Peek
         [TestMethod]
@@ -369,7 +370,7 @@ namespace DSTests
         [TestMethod]
         public void DIsFull2()
         {
-            stack = new Stack<GenericParameterHelper>(StackImplementaion.DoubleLinkedList, 5);
+            stack = new Stack<GenericParameterHelper>(new StackDoubleLinkedList<GenericParameterHelper>(5));
             for (int i = 0; i < 3; i++)
                 stack.Push(item);
             Assert.IsFalse(stack.IsFull);
@@ -377,7 +378,7 @@ namespace DSTests
         [TestMethod]
         public void DIsFull3()
         {
-            stack = new Stack<GenericParameterHelper>(StackImplementaion.DoubleLinkedList, 5);
+            stack = new Stack<GenericParameterHelper>(new StackDoubleLinkedList<GenericParameterHelper>(5));
             for (int i = 0; i < 10; i++)
                 stack.Push(item);
             Assert.IsTrue(stack.IsFull);

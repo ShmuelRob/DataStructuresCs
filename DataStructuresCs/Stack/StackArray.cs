@@ -1,14 +1,16 @@
 ﻿
+using System;
+
 namespace DataStructuresCs.Stack
 {
-    internal class StackArray<T> : IStack<T>
+    public class StackArray<T> : IStack<T>
     {
         T[] stack;
         int ind;
         readonly bool canGrow;
         const int ARRAY_LENGTH = 17;
 
-        public StackArray(int length) => stack = new T[length];
+        public StackArray(int length) => stack = new T[Math.Abs(length)];
         public StackArray()
         {
             stack = new T[ARRAY_LENGTH];

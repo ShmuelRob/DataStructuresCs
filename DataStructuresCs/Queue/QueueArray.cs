@@ -1,6 +1,8 @@
-﻿namespace DataStructuresCs.Queue
+﻿using System;
+
+namespace DataStructuresCs.Queue
 {
-    internal class QueueArray<T> : IQueue<T>
+    public class QueueArray<T> : IQueue<T>
     {
         T[] queue;
         int firstInd;
@@ -12,10 +14,10 @@
         {
             canGrow = true;
         }
-        public QueueArray(int capacity)
+        public QueueArray(int length)
         {
-            queue = new T[capacity];
-            if (capacity != 0)
+            queue = new T[Math.Abs(length)];
+            if (length != 0)
                 firstInd = lastInd = -1;
         }
 

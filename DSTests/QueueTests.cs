@@ -12,33 +12,34 @@ namespace DSTests
         readonly GenericParameterHelper item = new GenericParameterHelper();
         readonly GenericParameterHelper item2 = new GenericParameterHelper();
 
-        void Limit(QueueImplementaion imp, int limitLength)
+        void Limit(IQueue<GenericParameterHelper> queue, int limitLength)
         {
-            queue = new Queue<GenericParameterHelper>(imp, limitLength);
+            queue = new Queue<GenericParameterHelper>(queue);
             for (int i = 0; i < Math.Abs(limitLength) * 2; i++)
                 queue.EnQueue(item);
             Assert.AreEqual(Math.Abs(limitLength), queue.Count);
         }
 
         #region Array
-        void ArrayInit() => queue = new Queue<GenericParameterHelper>(QueueImplementaion.Array);
+        void ArrayInit() => queue
+            = new Queue<GenericParameterHelper>(new QueueArray<GenericParameterHelper>());
         #region Limited
         [TestMethod]
-        public void ALimitedPos() => Limit(QueueImplementaion.Array, 4);
+        public void ALimitedPos() => Limit(new QueueArray<GenericParameterHelper>(4), 4);
         [TestMethod]
-        public void ALimitedPos1() => Limit(QueueImplementaion.Array, 1);
+        public void ALimitedPos1() => Limit(new QueueArray<GenericParameterHelper>(1), 1);
         [TestMethod]
-        public void ALimited0() => Limit(QueueImplementaion.Array, 0);
+        public void ALimited0() => Limit(new QueueArray<GenericParameterHelper>(0), 0);
         [TestMethod]
-        public void ALimitedMin1() => Limit(QueueImplementaion.Array, -1);
+        public void ALimitedMin1() => Limit(new QueueArray<GenericParameterHelper>(-1), -1);
         [TestMethod]
-        public void ALimitedMin() => Limit(QueueImplementaion.Array, -4);
+        public void ALimitedMin() => Limit(new QueueArray<GenericParameterHelper>(-4), -4);
         #endregion
         #region Enqueue
         [TestMethod]
         public void AEnQueue0()
         {
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.Array, 0);
+            queue = new Queue<GenericParameterHelper>(new QueueArray<GenericParameterHelper>(0));
             Assert.IsFalse(queue.EnQueue(item));
         }
         [TestMethod]
@@ -135,7 +136,7 @@ namespace DSTests
         public void AIsFull1()
         {
             var length = 4;
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.Array, length);
+            queue = new Queue<GenericParameterHelper>(new QueueArray<GenericParameterHelper>(length));
             for (int i = 0; i < length * 2; i++)
                 queue.EnQueue(item);
             Assert.IsTrue(queue.IsFull);
@@ -144,9 +145,8 @@ namespace DSTests
         [TestMethod]
         public void AIsFull2()
         {
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.Array, 5);
+            queue = new Queue<GenericParameterHelper>(new QueueArray<GenericParameterHelper>(5));
             Assert.IsFalse(queue.IsFull);
-
         }
         [TestMethod]
         public void AIsFull3()
@@ -159,24 +159,25 @@ namespace DSTests
         #endregion
         #endregion
         #region LinkedList
-        void LinkedListInit() => queue = new Queue<GenericParameterHelper>(QueueImplementaion.LinkedList);
+        void LinkedListInit() => queue
+            = new Queue<GenericParameterHelper>(new QueueLinkedList<GenericParameterHelper>());
         #region Limited
         [TestMethod]
-        public void LLimitedPos() => Limit(QueueImplementaion.LinkedList, 4);
+        public void LLimitedPos() => Limit(new QueueLinkedList<GenericParameterHelper>(4), 4);
         [TestMethod]
-        public void LLimitedPos1() => Limit(QueueImplementaion.LinkedList, 1);
+        public void LLimitedPos1() => Limit(new QueueLinkedList<GenericParameterHelper>(1), 1);
         [TestMethod]
-        public void LLimited0() => Limit(QueueImplementaion.LinkedList, 0);
+        public void LLimited0() => Limit(new QueueLinkedList<GenericParameterHelper>(0), 0);
         [TestMethod]
-        public void LLimitedMin1() => Limit(QueueImplementaion.LinkedList, -1);
+        public void LLimitedMin1() => Limit(new QueueLinkedList<GenericParameterHelper>(-1), -1);
         [TestMethod]
-        public void LLimitedMin() => Limit(QueueImplementaion.LinkedList, -4);
+        public void LLimitedMin() => Limit(new QueueLinkedList<GenericParameterHelper>(-4), -4);
         #endregion
         #region Enqueue
         [TestMethod]
         public void LEnQueue0()
         {
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.LinkedList, 0);
+            queue = new Queue<GenericParameterHelper>(new QueueLinkedList<GenericParameterHelper>(0));
             Assert.IsFalse(queue.EnQueue(item));
         }
         [TestMethod]
@@ -273,7 +274,7 @@ namespace DSTests
         public void LIsFull1()
         {
             var length = 3;
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.LinkedList, length);
+            queue = new Queue<GenericParameterHelper>(new QueueLinkedList<GenericParameterHelper>(length));
             for (int i = 0; i < length + 1; i++)
                 queue.EnQueue(item);
             Assert.IsTrue(queue.IsFull);
@@ -282,9 +283,8 @@ namespace DSTests
         [TestMethod]
         public void LIsFull2()
         {
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.LinkedList, 5);
+            queue = new Queue<GenericParameterHelper>(new QueueLinkedList<GenericParameterHelper>(5));
             Assert.IsFalse(queue.IsFull);
-
         }
         [TestMethod]
         public void LIsFull3()
@@ -297,24 +297,25 @@ namespace DSTests
         #endregion
         #endregion
         #region DoubleLinkedList
-        void DoubleLinkedListInit() => queue = new Queue<GenericParameterHelper>(QueueImplementaion.DoubleLinkedList);
+        void DoubleLinkedListInit() => queue
+            = new Queue<GenericParameterHelper>(new QueueDoubleLinkedList<GenericParameterHelper>());
         #region Limited
         [TestMethod]
-        public void DLimitedPos() => Limit(QueueImplementaion.DoubleLinkedList, 4);
+        public void DLimitedPos() => Limit(new QueueDoubleLinkedList<GenericParameterHelper>(4), 4);
         [TestMethod]
-        public void DLimitedPos1() => Limit(QueueImplementaion.DoubleLinkedList, 1);
+        public void DLimitedPos1() => Limit(new QueueDoubleLinkedList<GenericParameterHelper>(1), 1);
         [TestMethod]
-        public void DLimited0() => Limit(QueueImplementaion.DoubleLinkedList, 0);
+        public void DLimited0() => Limit(new QueueDoubleLinkedList<GenericParameterHelper>(0), 0);
         [TestMethod]
-        public void DLimitedMin1() => Limit(QueueImplementaion.DoubleLinkedList, -1);
+        public void DLimitedMin1() => Limit(new QueueDoubleLinkedList<GenericParameterHelper>(-1), -1);
         [TestMethod]
-        public void DLimitedMin() => Limit(QueueImplementaion.DoubleLinkedList, -4);
+        public void DLimitedMin() => Limit(new QueueDoubleLinkedList<GenericParameterHelper>(-4), -4);
         #endregion
         #region Enqueue
         [TestMethod]
         public void DEnQueue0()
         {
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.DoubleLinkedList, 0);
+            queue = new Queue<GenericParameterHelper>(new QueueDoubleLinkedList<GenericParameterHelper>(0));
             Assert.IsFalse(queue.EnQueue(item));
         }
         [TestMethod]
@@ -411,7 +412,7 @@ namespace DSTests
         public void DIsFull1()
         {
             var length = 3;
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.DoubleLinkedList, length);
+            queue = new Queue<GenericParameterHelper>(new QueueDoubleLinkedList<GenericParameterHelper>(length));
             for (int i = 0; i < length + 1; i++)
                 queue.EnQueue(item);
             Assert.IsTrue(queue.IsFull);
@@ -420,9 +421,8 @@ namespace DSTests
         [TestMethod]
         public void DIsFull2()
         {
-            queue = new Queue<GenericParameterHelper>(QueueImplementaion.DoubleLinkedList, 5);
+            queue = new Queue<GenericParameterHelper>(new QueueDoubleLinkedList<GenericParameterHelper>(5));
             Assert.IsFalse(queue.IsFull);
-
         }
         [TestMethod]
         public void DIsFull3()

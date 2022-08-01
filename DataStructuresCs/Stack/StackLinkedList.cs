@@ -1,7 +1,8 @@
-﻿
+﻿using System;
+
 namespace DataStructuresCs.Stack
 {
-    internal class StackLinkedList<T> : IStack<T>
+    public class StackLinkedList<T> : IStack<T>
     {
         readonly LinkedList<T> stack;
         readonly int? length;
@@ -9,7 +10,7 @@ namespace DataStructuresCs.Stack
         public StackLinkedList()
             => stack = new LinkedList<T>();
         public StackLinkedList(int length)
-            : this() => this.length = length;
+            : this() => this.length = Math.Abs(length);
 
         public int Count => stack.Count;
         public bool IsEmpty => stack.IsEmpty;

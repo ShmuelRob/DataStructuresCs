@@ -51,12 +51,10 @@
     <Compile Include="Queue\IQueue.cs" />
     <Compile Include="Queue\QueueArray.cs" />
     <Compile Include="Queue\QueueDoubleLinkedList.cs" />
-    <Compile Include="Queue\QueueImplementaion.cs" />
     <Compile Include="Queue\QueueLinkedList.cs" />
     <Compile Include="Stack.cs" />
     <Compile Include="Stack\StackArray.cs" />
     <Compile Include="Stack\StackDoubleLinkedList.cs" />
-    <Compile Include="Stack\StackImplementaion.cs" />
     <Compile Include="Stack\IStack.cs" />
     <Compile Include="Stack\StackLinkedList.cs" />
   </ItemGroup>

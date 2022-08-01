@@ -7,41 +7,10 @@ namespace DataStructuresCs
     {
         readonly IQueue<T> queue;
 
-        public Queue() : this(QueueImplementaion.Array) { }
+        public Queue() : this(new QueueArray<T>()) { }
         public Queue(int length) 
-            : this(QueueImplementaion.Array, length) { }
-        public Queue(QueueImplementaion implementaion)
-        {
-            switch (implementaion)
-            {
-                case QueueImplementaion.LinkedList:
-                    queue = new QueueLinkedList<T>();
-                    break;
-                case QueueImplementaion.DoubleLinkedList:
-                    queue = new QueueDoubleLinkedList<T>();
-                    break;
-                case QueueImplementaion.Array:
-                default:
-                    queue = new QueueArray<T>();
-                    break;
-            }
-        }
-        public Queue(QueueImplementaion implementaion, int length)
-        {
-            switch (implementaion)
-            {
-                case QueueImplementaion.LinkedList:
-                    queue = new QueueLinkedList<T>(Math.Abs(length));
-                    break;
-                case QueueImplementaion.DoubleLinkedList:
-                    queue = new QueueDoubleLinkedList<T>(Math.Abs(length));
-                    break;
-                case QueueImplementaion.Array:
-                default:
-                    queue = new QueueArray<T>(Math.Abs(length));
-                    break;
-            }
-        }
+            : this(new QueueArray<T>(length)) { }
+        public Queue(IQueue<T> queue) => this.queue = queue;
 
         public int Count => queue.Count;
         public bool IsEmpty => queue.IsEmpty;

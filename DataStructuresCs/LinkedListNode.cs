@@ -4,7 +4,7 @@
     {
         internal T value;
         internal LinkedListNode<T> next;
-        public LinkedListNode(T val) // O(1)
+        internal LinkedListNode(T val) // O(1)
         {
             value = val;
             next = null;

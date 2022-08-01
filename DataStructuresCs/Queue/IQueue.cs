@@ -1,6 +1,6 @@
 ﻿namespace DataStructuresCs.Queue
 {
-    internal interface IQueue<T>
+    public interface IQueue<T>
     {
         int Count { get; }
         bool IsEmpty { get; }

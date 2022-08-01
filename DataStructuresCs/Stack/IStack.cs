@@ -1,6 +1,6 @@
 ﻿namespace DataStructuresCs.Stack
 {
-    internal interface IStack<T>
+    public interface IStack<T>
     {
         int Count { get; }
         bool IsEmpty { get; }
