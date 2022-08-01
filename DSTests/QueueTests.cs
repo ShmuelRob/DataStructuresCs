@@ -72,15 +72,14 @@ namespace DSTests
         {
             ArrayInit();
             queue.EnQueue(item);
-            Assert.IsTrue(queue.DeQueue(out var data));
+            Assert.AreSame(item, queue.DeQueue());
             Assert.AreEqual(0, queue.Count);
-            Assert.AreSame(item, data);
         }
         [TestMethod]
         public void ADeQueue2()
         {
             ArrayInit();
-            Assert.IsFalse(queue.DeQueue(out _));
+            Assert.IsNull(queue.DeQueue());
             Assert.AreEqual(0, queue.Count);
         }
         #endregion
@@ -90,8 +89,8 @@ namespace DSTests
         {
             ArrayInit();
             queue.EnQueue(item);
-            Assert.IsTrue(queue.Peek(out var data));
-            Assert.AreSame(item, data);
+            Assert.IsNotNull(queue.Peek());
+            Assert.AreSame(item, queue.Peek());
         }
         [TestMethod]
         public void APeek2()
@@ -99,14 +98,38 @@ namespace DSTests
             ArrayInit();
             queue.EnQueue(item);
             queue.EnQueue(item2);
-            Assert.IsTrue(queue.Peek(out var data));
-            Assert.AreSame(item, data);
+            Assert.IsNotNull(queue.Peek());
+            Assert.AreSame(item, queue.Peek());
         }
         [TestMethod]
         public void APeek3()
         {
             ArrayInit();
-            Assert.IsFalse(queue.Peek(out _));
+            Assert.IsNull(queue.Peek());
+        }
+        #endregion
+        #region ChangeStrategy
+        [TestMethod]
+        public void AChangeStrategyL()
+        {
+            ArrayInit();
+            queue.EnQueue(item);
+            queue.EnQueue(item2);
+            queue.EnQueue(item);
+            queue.ChangeStrategy(new QueueLinkedList<GenericParameterHelper>());
+            Assert.AreSame(item, queue.DeQueue());
+            Assert.AreSame(item2, queue.Peek());
+        }
+        [TestMethod]
+        public void AChangeStrategyD()
+        {
+            ArrayInit();
+            queue.EnQueue(item);
+            queue.EnQueue(item2);
+            queue.EnQueue(item);
+            queue.ChangeStrategy(new QueueDoubleLinkedList<GenericParameterHelper>());
+            Assert.AreSame(item, queue.DeQueue());
+            Assert.AreSame(item2, queue.Peek());
         }
         #endregion
         #region OtherFunctions
@@ -129,7 +152,7 @@ namespace DSTests
         public void AIsEmpty3()
         {
             ArrayInit();
-            Assert.IsFalse(queue.DeQueue(out _));
+            Assert.IsNull(queue.DeQueue());
             Assert.IsTrue(queue.IsEmpty);
         }
         [TestMethod]
@@ -210,7 +233,8 @@ namespace DSTests
         {
             LinkedListInit();
             queue.EnQueue(item);
-            Assert.IsTrue(queue.DeQueue(out var data));
+            var data = queue.DeQueue();
+            Assert.IsNotNull(data);
             Assert.AreEqual(0, queue.Count);
             Assert.AreSame(item, data);
         }
@@ -218,7 +242,7 @@ namespace DSTests
         public void LDeQueue2()
         {
             LinkedListInit();
-            Assert.IsFalse(queue.DeQueue(out _));
+            Assert.IsNull(queue.DeQueue());
             Assert.AreEqual(0, queue.Count);
         }
         #endregion
@@ -228,8 +252,7 @@ namespace DSTests
         {
             LinkedListInit();
             queue.EnQueue(item);
-            Assert.IsTrue(queue.Peek(out var data));
-            Assert.AreSame(item, data);
+            Assert.AreSame(item, queue.Peek());
         }
         [TestMethod]
         public void LPeek2()
@@ -237,14 +260,37 @@ namespace DSTests
             LinkedListInit();
             queue.EnQueue(item);
             queue.EnQueue(item2);
-            Assert.IsTrue(queue.Peek(out var data));
-            Assert.AreSame(item, data);
+            Assert.AreSame(item, queue.Peek());
         }
         [TestMethod]
         public void LPeek3()
         {
             LinkedListInit();
-            Assert.IsFalse(queue.Peek(out _));
+            Assert.IsNull(queue.Peek());
+        }
+        #endregion
+        #region ChangeStrategy
+        [TestMethod]
+        public void LChangeStrategyA()
+        {
+            LinkedListInit();
+            queue.EnQueue(item);
+            queue.EnQueue(item2);
+            queue.EnQueue(item);
+            queue.ChangeStrategy(new QueueArray<GenericParameterHelper>());
+            Assert.AreSame(item, queue.DeQueue());
+            Assert.AreSame(item2, queue.Peek());
+        }
+        [TestMethod]
+        public void LChangeStrategyD()
+        {
+            LinkedListInit();
+            queue.EnQueue(item);
+            queue.EnQueue(item2);
+            queue.EnQueue(item);
+            queue.ChangeStrategy(new QueueDoubleLinkedList<GenericParameterHelper>());
+            Assert.AreSame(item, queue.DeQueue());
+            Assert.AreSame(item2, queue.Peek());
         }
         #endregion
         #region OtherFunctions
@@ -267,7 +313,7 @@ namespace DSTests
         public void LIsEmpty3()
         {
             LinkedListInit();
-            Assert.IsFalse(queue.DeQueue(out _));
+            Assert.IsNull(queue.DeQueue());
             Assert.IsTrue(queue.IsEmpty);
         }
         [TestMethod]
@@ -348,7 +394,8 @@ namespace DSTests
         {
             DoubleLinkedListInit();
             queue.EnQueue(item);
-            Assert.IsTrue(queue.DeQueue(out var data));
+            var data = queue.DeQueue();
+            Assert.IsNotNull(data);
             Assert.AreEqual(0, queue.Count);
             Assert.AreSame(item, data);
         }
@@ -356,7 +403,7 @@ namespace DSTests
         public void DDeQueue2()
         {
             DoubleLinkedListInit();
-            Assert.IsFalse(queue.DeQueue(out _));
+            Assert.IsNull(queue.DeQueue());
             Assert.AreEqual(0, queue.Count);
         }
         #endregion
@@ -366,8 +413,8 @@ namespace DSTests
         {
             DoubleLinkedListInit();
             queue.EnQueue(item);
-            Assert.IsTrue(queue.Peek(out var data));
-            Assert.AreSame(item, data);
+            Assert.IsNotNull(queue.Peek());
+            Assert.AreSame(item, queue.Peek());
         }
         [TestMethod]
         public void DPeek2()
@@ -375,14 +422,40 @@ namespace DSTests
             DoubleLinkedListInit();
             queue.EnQueue(item);
             queue.EnQueue(item2);
-            Assert.IsTrue(queue.Peek(out var data));
-            Assert.AreSame(item, data);
+            Assert.IsNotNull(queue.Peek());
+            Assert.AreSame(item, queue.Peek());
         }
         [TestMethod]
         public void DPeek3()
         {
             DoubleLinkedListInit();
-            Assert.IsFalse(queue.Peek(out _));
+            Assert.IsNull(queue.Peek());
+        }
+        #endregion
+        #region ChangeStrategy
+        [TestMethod]
+        public void DChangeStrategyA()
+        {
+            DoubleLinkedListInit();
+            queue.EnQueue(item);
+            queue.EnQueue(item2);
+            queue.EnQueue(item);
+            queue.ChangeStrategy(new QueueArray<GenericParameterHelper>());
+            var data = queue.DeQueue();
+            Assert.AreSame(item, data);
+            Assert.AreSame(item2, queue.Peek());
+        }
+        [TestMethod]
+        public void DChangeStrategyL()
+        {
+            DoubleLinkedListInit();
+            queue.EnQueue(item);
+            queue.EnQueue(item2);
+            queue.EnQueue(item);
+            queue.ChangeStrategy(new QueueLinkedList<GenericParameterHelper>());
+            var data = queue.DeQueue();
+            Assert.AreSame(item, data);
+            Assert.AreSame(item2, queue.Peek());
         }
         #endregion
         #region OtherFunctions
@@ -405,7 +478,7 @@ namespace DSTests
         public void DIsEmpty3()
         {
             DoubleLinkedListInit();
-            Assert.IsFalse(queue.DeQueue(out _));
+            Assert.IsNull(queue.DeQueue());
             Assert.IsTrue(queue.IsEmpty);
         }
         [TestMethod]

@@ -15,9 +15,14 @@ namespace DataStructuresCs.Stack
         public int Count => stack.Count;
         public bool IsEmpty => stack.Count == 0;
         public bool IsFull => length != null && stack.Count == length;
-        public void Push(T item)
+        public bool Push(T item)
         {
-            if (length == null || Count < length) stack.AddFirst(item);
+            if (length == null || Count < length)
+            {
+                stack.AddFirst(item);
+                return true;
+            }
+            return false;
         }
         public T Pop()
         {
@@ -25,12 +30,6 @@ namespace DataStructuresCs.Stack
             stack.RemoveFirst();
             return data;
         }
-        public bool Peek(out T data)
-        {
-            data = default;
-            if (IsEmpty) return false;
-            data = stack.First;
-            return true;
-        }
+        public T Peek() => IsEmpty ? default : stack.First;
     }
 }

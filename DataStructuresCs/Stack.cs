@@ -14,14 +14,14 @@ namespace DataStructuresCs
         public int Count => stack.Count;
         public bool IsEmpty => stack.IsEmpty;
         public bool IsFull => stack.IsFull;
-        public void Push(T item) => stack.Push(item);
+        public bool Push(T item) => stack.Push(item);
         public T Pop() => stack.Pop();
-        public bool Peek(out T data) => stack.Peek(out data);
+        public T Peek() => stack.Peek();
         public void ChangeStrategy(IStack<T> newStack)
         {
             IStack<T> tempStack = new Stack<T>();
             while (!stack.IsEmpty) tempStack.Push(stack.Pop());
-            while (!newStack.IsEmpty) newStack.Push(tempStack.Pop());
+            while (!tempStack.IsEmpty) newStack.Push(tempStack.Pop());
             stack = newStack;
         }
     }

@@ -15,12 +15,12 @@ namespace DataStructuresCs
         public bool IsEmpty => queue.IsEmpty;
         public bool IsFull => queue.IsFull;
         public bool EnQueue(T item) => queue.EnQueue(item);
-        public bool DeQueue(out T data) => queue.DeQueue(out data);
-        public bool Peek(out T data) => queue.Peek(out data);
+        public T DeQueue() => queue.DeQueue();
+        public T Peek() => queue.Peek();
         public void ChangeStrategy(IQueue<T> newQueue)
         {
-            while (queue.DeQueue(out var data))
-                newQueue.EnQueue(data);
+            while (!queue.IsEmpty)
+                newQueue.EnQueue(queue.DeQueue());
             queue = newQueue;
         }
     }

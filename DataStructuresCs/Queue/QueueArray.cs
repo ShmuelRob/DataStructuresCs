@@ -34,33 +34,22 @@ namespace DataStructuresCs.Queue
             Count++;
             return true;
         }
-        public bool DeQueue(out T data)
+        public T DeQueue()
         {
-            data = default;
-            if (IsEmpty) return false;
-            data = queue[firstInd];
+            if (IsEmpty) return default;
+            T data = queue[firstInd];
             firstInd = (firstInd + 1) % queue.Length;
             if (firstInd == lastInd) firstInd = lastInd = -1;
             Count--;
-            return true;
+            return data;
         }
-        public bool Peek(out T data)
-        {
-            data = default;
-            if (IsEmpty) return false;
-            data = queue[firstInd];
-            return true;
-        }
+        public T Peek() => IsEmpty ? default : queue[firstInd];
 
         public void ReBuild()
         {
             T[] newQueue = new T[queue.Length * 2];
             int ind = 0;
-            while (!IsEmpty)
-            {
-                DeQueue(out var item);
-                newQueue[ind++] = item;
-            }
+            while (!IsEmpty) newQueue[ind++] = DeQueue();
             firstInd = 0;
             lastInd = ind % newQueue.Length;
             queue = newQueue;

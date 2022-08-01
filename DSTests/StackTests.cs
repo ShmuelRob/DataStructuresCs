@@ -17,15 +17,17 @@ namespace DSTests
             stack = new Stack<GenericParameterHelper>(stack);
             for (int i = 0; i < Math.Abs(limitLength) * 2; i++)
                 stack.Push(item);
+            Assert.IsFalse(stack.Push(item));
             Assert.AreEqual(Math.Abs(limitLength), stack.Count);
         }
+
         #region Array
         void ArrayInit() => stack = new Stack<GenericParameterHelper>(new StackArray<GenericParameterHelper>());
         #region Limited
         [TestMethod]
         public void ALimitedPos() => Limit(new StackArray<GenericParameterHelper>(4), 4);
         [TestMethod]
-        public void ALimitedPos1() => Limit(new StackArray<GenericParameterHelper>(1), 1);  
+        public void ALimitedPos1() => Limit(new StackArray<GenericParameterHelper>(1), 1);
         [TestMethod]
         public void ALimited0() => Limit(new StackArray<GenericParameterHelper>(0), 0);
         [TestMethod]
@@ -33,34 +35,14 @@ namespace DSTests
         [TestMethod]
         public void ALimitedMin() => Limit(new StackArray<GenericParameterHelper>(-4), -4);
         #endregion
-        #region Peek
-        [TestMethod]
-        public void APeek1()
-        {
-            ArrayInit();
-            Assert.IsFalse(stack.Peek(out var data));
-            Assert.IsNull(data);
-        }
-        [TestMethod]
-        public void APeek2()
-        {
-            ArrayInit();
-            stack.Push(item);
-            Assert.IsTrue(stack.Peek(out var data));
-            Assert.AreEqual(1, stack.Count);
-            Assert.IsNotNull(data);
-            Assert.AreSame(item, data);
-        }
-        #endregion
         #region Push
         [TestMethod]
         public void APush1()
         {
             ArrayInit();
-            stack.Push(item);
-            stack.Peek(out var data);
+            Assert.IsTrue(stack.Push(item));
             Assert.AreEqual(1, stack.Count);
-            Assert.AreSame(item, data);
+            Assert.AreSame(item, stack.Peek());
         }
         [TestMethod]
         public void APush2()
@@ -68,9 +50,25 @@ namespace DSTests
             ArrayInit();
             stack.Push(item);
             stack.Push(item2);
-            stack.Peek(out var data);
             Assert.AreEqual(2, stack.Count);
-            Assert.AreSame(item2, data);
+            Assert.AreSame(item2, stack.Peek());
+        }
+        #endregion
+        #region Peek
+        [TestMethod]
+        public void APeek1()
+        {
+            ArrayInit();
+            Assert.IsNull(stack.Peek());
+        }
+        [TestMethod]
+        public void APeek2()
+        {
+            ArrayInit();
+            stack.Push(item);
+            Assert.AreEqual(1, stack.Count);
+            Assert.IsNotNull(stack.Peek());
+            Assert.AreSame(item, stack.Peek());
         }
         #endregion
         #region Pop
@@ -97,6 +95,30 @@ namespace DSTests
             stack.Push(item2);
             Assert.AreSame(item2, stack.Pop());
             Assert.AreEqual(1, stack.Count);
+        }
+        #endregion
+        #region ChangeStrategy
+        [TestMethod]
+        public void AChangeStrategyL()
+        {
+            ArrayInit();
+            stack.Push(item);
+            stack.Push(item2);
+            stack.Push(item);
+            stack.ChangeStrategy(new StackLinkedList<GenericParameterHelper>());
+            Assert.AreSame(item, stack.Pop());
+            Assert.AreSame(item2, stack.Peek());
+        }
+        [TestMethod]
+        public void AChangeStrategyD()
+        {
+            ArrayInit();
+            stack.Push(item);
+            stack.Push(item2);
+            stack.Push(item);
+            stack.ChangeStrategy(new StackDoubleLinkedList<GenericParameterHelper>());
+            Assert.AreSame(item, stack.Pop());
+            Assert.AreSame(item2, stack.Peek());
         }
         #endregion
         #region OtherFunctions
@@ -155,34 +177,14 @@ namespace DSTests
         [TestMethod]
         public void LLimitedMin() => Limit(new StackLinkedList<GenericParameterHelper>(-4), -4);
         #endregion
-        #region Peek
-        [TestMethod]
-        public void LPeek1()
-        {
-            LinkedListInit();
-            Assert.IsFalse(stack.Peek(out var data));
-            Assert.IsNull(data);
-        }
-        [TestMethod]
-        public void LPeek2()
-        {
-            LinkedListInit();
-            stack.Push(item);
-            Assert.IsTrue(stack.Peek(out var data));
-            Assert.AreEqual(1, stack.Count);
-            Assert.IsNotNull(data);
-            Assert.AreSame(item, data);
-        }
-        #endregion
         #region Push
         [TestMethod]
         public void LPush1()
         {
             LinkedListInit();
-            stack.Push(item);
-            stack.Peek(out var data);
+            Assert.IsTrue(stack.Push(item));
             Assert.AreEqual(1, stack.Count);
-            Assert.AreSame(item, data);
+            Assert.AreSame(item, stack.Peek());
         }
         [TestMethod]
         public void LPush2()
@@ -190,9 +192,25 @@ namespace DSTests
             LinkedListInit();
             stack.Push(item);
             stack.Push(item2);
-            stack.Peek(out var data);
             Assert.AreEqual(2, stack.Count);
-            Assert.AreSame(item2, data);
+            Assert.AreSame(item2, stack.Peek());
+        }
+        #endregion
+        #region Peek
+        [TestMethod]
+        public void LPeek1()
+        {
+            LinkedListInit();
+            Assert.IsNull(stack.Peek());
+        }
+        [TestMethod]
+        public void LPeek2()
+        {
+            LinkedListInit();
+            stack.Push(item);
+            Assert.AreEqual(1, stack.Count);
+            Assert.IsNotNull(stack.Peek());
+            Assert.AreSame(item, stack.Peek());
         }
         #endregion
         #region Pop
@@ -219,6 +237,30 @@ namespace DSTests
             stack.Push(item2);
             Assert.AreSame(item2, stack.Pop());
             Assert.AreEqual(1, stack.Count);
+        }
+        #endregion
+        #region ChangeStrategy
+        [TestMethod]
+        public void LChangeStrategyA()
+        {
+            LinkedListInit();
+            stack.Push(item);
+            stack.Push(item2);
+            stack.Push(item);
+            stack.ChangeStrategy(new StackArray<GenericParameterHelper>());
+            Assert.AreSame(item, stack.Pop());
+            Assert.AreSame(item2, stack.Peek());
+        }
+        [TestMethod]
+        public void LChangeStrategyD()
+        {
+            LinkedListInit();
+            stack.Push(item);
+            stack.Push(item2);
+            stack.Push(item);
+            stack.ChangeStrategy(new StackDoubleLinkedList<GenericParameterHelper>());
+            Assert.AreSame(item, stack.Pop());
+            Assert.AreSame(item2, stack.Peek());
         }
         #endregion
         #region OtherFunctions
@@ -264,7 +306,7 @@ namespace DSTests
         #endregion
         #endregion
         #region DoubleLinkedList
-        void DoubleLinkedListInit() => stack = 
+        void DoubleLinkedListInit() => stack =
             new Stack<GenericParameterHelper>(new StackDoubleLinkedList<GenericParameterHelper>());
         #region Limited
         [TestMethod]
@@ -278,34 +320,14 @@ namespace DSTests
         [TestMethod]
         public void DLimitedMin() => Limit(new StackDoubleLinkedList<GenericParameterHelper>(-4), -4);
         #endregion
-        #region Peek
-        [TestMethod]
-        public void DPeek1()
-        {
-            DoubleLinkedListInit();
-            Assert.IsFalse(stack.Peek(out var data));
-            Assert.IsNull(data);
-        }
-        [TestMethod]
-        public void DPeek2()
-        {
-            DoubleLinkedListInit();
-            stack.Push(item);
-            Assert.IsTrue(stack.Peek(out var data));
-            Assert.AreEqual(1, stack.Count);
-            Assert.IsNotNull(data);
-            Assert.AreSame(item, data);
-        }
-        #endregion
         #region Push
         [TestMethod]
         public void DPush1()
         {
             DoubleLinkedListInit();
-            stack.Push(item);
-            stack.Peek(out var data);
+            Assert.IsTrue(stack.Push(item));
             Assert.AreEqual(1, stack.Count);
-            Assert.AreSame(item, data);
+            Assert.AreSame(item, stack.Peek());
         }
         [TestMethod]
         public void DPush2()
@@ -313,9 +335,25 @@ namespace DSTests
             DoubleLinkedListInit();
             stack.Push(item);
             stack.Push(item2);
-            stack.Peek(out var data);
             Assert.AreEqual(2, stack.Count);
-            Assert.AreSame(item2, data);
+            Assert.AreSame(item2, stack.Peek());
+        }
+        #endregion
+        #region Peek
+        [TestMethod]
+        public void DPeek1()
+        {
+            DoubleLinkedListInit();
+            Assert.IsNull(stack.Peek());
+        }
+        [TestMethod]
+        public void DPeek2()
+        {
+            DoubleLinkedListInit();
+            stack.Push(item);
+            Assert.AreEqual(1, stack.Count);
+            Assert.IsNotNull(stack.Peek());
+            Assert.AreSame(item, stack.Peek());
         }
         #endregion
         #region Pop
@@ -341,6 +379,30 @@ namespace DSTests
             stack.Push(item2);
             Assert.AreEqual(item2.Data, stack.Pop().Data);
             Assert.AreEqual(1, stack.Count);
+        }
+        #endregion
+        #region ChangeStrategy
+        [TestMethod]
+        public void DChangeStrategyA()
+        {
+            DoubleLinkedListInit();
+            stack.Push(item);
+            stack.Push(item2);
+            stack.Push(item);
+            stack.ChangeStrategy(new StackArray<GenericParameterHelper>());
+            Assert.AreSame(item, stack.Pop());
+            Assert.AreSame(item2, stack.Peek());
+        }
+        [TestMethod]
+        public void DChangeStrategyL()
+        {
+            DoubleLinkedListInit();
+            stack.Push(item);
+            stack.Push(item2);
+            stack.Push(item);
+            stack.ChangeStrategy(new StackLinkedList<GenericParameterHelper>());
+            Assert.AreSame(item, stack.Pop());
+            Assert.AreSame(item2, stack.Peek());
         }
         #endregion
         #region OtherFunctions

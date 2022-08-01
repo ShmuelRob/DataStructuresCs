@@ -21,20 +21,13 @@ namespace DataStructuresCs.Queue
             queue.AddLast(item);
             return true;
         }
-        public bool DeQueue(out T data)
+        public T DeQueue()
         {
-            data = default;
-            if (queue.Count <= 0) return false;
-            data = queue.First;
+            if (queue.Count <= 0) return default;
+            T data = queue.First;
             queue.RemoveFirst();
-            return true;
+            return data;
         }
-        public bool Peek(out T data)
-        {
-            data = default;
-            if (queue.Count <= 0) return false;
-            data = queue.First;
-            return true;
-        }
+        public T Peek() => IsEmpty ? default : queue.First;
     }
 }
