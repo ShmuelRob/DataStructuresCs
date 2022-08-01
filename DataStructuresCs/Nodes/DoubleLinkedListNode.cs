@@ -1,4 +1,4 @@
-﻿namespace DataStructuresCs
+﻿namespace DataStructuresCs.Nodes
 {
     internal class DoubleLinkedListNode<T>
     {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataStructuresCs.Nodes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -7,8 +8,8 @@ namespace DataStructuresCs
 {
     public class LinkedList<T> : IList<T>, IEnumerable<T>, ICollection<T>
     {
-        LinkedListNode<T> first;
-        LinkedListNode<T> last;
+        Nodes.LinkedListNode<T> first;
+        Nodes.LinkedListNode<T> last;
 
         public T First { get => first.value; set => first.value = value; }
         public T Last { get => last.value; set => last.value = value; }
@@ -37,12 +38,12 @@ namespace DataStructuresCs
             if (IsReadOnly) return;
             if (last == null)
             {
-                first = new LinkedListNode<T>(item);
+                first = new Nodes.LinkedListNode<T>(item);
                 last = first;
             }
             else
             {
-                var temp = new LinkedListNode<T>(item) { next = first };
+                var temp = new Nodes.LinkedListNode<T>(item) { next = first };
                 first = temp;
             }
             Count++;
@@ -53,7 +54,7 @@ namespace DataStructuresCs
             if (last == null) AddFirst(item);
             else
             {
-                LinkedListNode<T> newLast = new LinkedListNode<T>(item);
+                Nodes.LinkedListNode<T> newLast = new Nodes.LinkedListNode<T>(item);
                 last.next = newLast;
                 last = newLast;
                 Count++;
@@ -84,7 +85,7 @@ namespace DataStructuresCs
                 Count--;
                 return true;
             }
-            LinkedListNode<T> temp = first;
+            Nodes.LinkedListNode<T> temp = first;
             while (temp.next != last) temp = temp.next;
             data = temp.next.value;
             temp.next = null;
@@ -175,7 +176,7 @@ namespace DataStructuresCs
             for (int i = 0; i < index - 1; i++)
                 tempPrevious = tempPrevious.next;
 
-            var newNode = new LinkedListNode<T>(item)
+            var newNode = new Nodes.LinkedListNode<T>(item)
             {
                 next = tempPrevious.next
             };
@@ -240,7 +241,7 @@ namespace DataStructuresCs
         }
         public IEnumerator<T> GetEnumerator()
         {
-            LinkedListNode<T> temp = first;
+            Nodes.LinkedListNode<T> temp = first;
             while (temp != null)
             {
                 yield return temp.value;
