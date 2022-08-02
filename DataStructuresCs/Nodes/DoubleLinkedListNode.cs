@@ -5,9 +5,9 @@
         internal T value;
         internal DoubleLinkedListNode<T> next;
         internal DoubleLinkedListNode<T> prev;
-        internal DoubleLinkedListNode(T val)
+        internal DoubleLinkedListNode(T value)
         {
-            value = val;
+            this.value = value;
             next = null;
             prev = null;
         }

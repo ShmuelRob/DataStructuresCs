@@ -4,9 +4,9 @@
     {
         internal T value;
         internal LinkedListNode<T> next;
-        internal LinkedListNode(T val) // O(1)
+        internal LinkedListNode(T value)
         {
-            value = val;
+            this.value = value;
             next = null;
         }
     }

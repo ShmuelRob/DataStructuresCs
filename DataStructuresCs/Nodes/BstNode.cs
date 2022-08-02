@@ -5,9 +5,9 @@
         internal T value;
         internal BstNode<T> left;
         internal BstNode<T> right;
-        internal BstNode(T val)
+        internal BstNode(T value)
         {
-            value = val;
+            this.value = value;
             left = right = null;
         }
         public bool IsLeaf => left == null && right == null;
