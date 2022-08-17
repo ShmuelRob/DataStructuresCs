@@ -42,10 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BST.cs" />
+    <Compile Include="HashTable.cs" />
     <Compile Include="Nodes\BstNode.cs" />
     <Compile Include="DoubleLinkedList.cs" />
     <Compile Include="Nodes\DoubleLinkedListNode.cs" />
     <Compile Include="LinkedList.cs" />
+    <Compile Include="Nodes\HashData.cs" />
     <Compile Include="Nodes\LinkedListNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queue.cs" />
