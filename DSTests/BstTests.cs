@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataStructuresCs;
+using System.Linq.Expressions;
+using System.Linq;
+using System.Collections.Generic;
 using System;
 
 namespace DSTests
@@ -140,23 +143,32 @@ namespace DSTests
         #region GetEnumerator
         #region InOrder
         [TestMethod]
-        public void In1()
+        public void In()
         {
-
+            List<int> ints = new List<int> { 5, 3, 6, 4, 7, -6, 1, 4, 6, 0 };
+            ints.ForEach(bst.Add);
+            ints.Sort();
+            CollectionAssert.AreEqual(ints, bst.GetEnumeratorInOrder().ToList());
         }
         #endregion
         #region PreOrder
         [TestMethod]
-        public void Pre1()
+        public void Pre()
         {
-
+            List<int> ints = new List<int> { 5, 3, 6, 4, 7, -6, 1, 4, 6, 0 };
+            ints.ForEach(bst.Add);
+            ints.Sort();
+            CollectionAssert.AreNotEqual(ints, bst.GetEnumeratorPreOrder().ToList());
         }
         #endregion
         #region PostOrder
         [TestMethod]
-        public void Post1()
+        public void Post()
         {
-
+            List<int> ints = new List<int> { 5, 3, 6, 4, 7, -6, 1, 4, 6, 0 };
+            ints.ForEach(bst.Add);
+            ints.Sort();
+            CollectionAssert.AreNotEqual(ints, bst.GetEnumeratorPostOrder().ToList());
         }
         #endregion
         #endregion
