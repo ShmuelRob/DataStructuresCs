@@ -1,9 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DataStructuresCs;
-using System.Linq.Expressions;
 using System.Linq;
 using System.Collections.Generic;
-using System;
 
 namespace DSTests
 {
@@ -149,7 +147,10 @@ namespace DSTests
             ints.ForEach(bst.Add);
             ints.Sort();
             CollectionAssert.AreEqual(ints, bst.GetEnumeratorInOrder().ToList());
+            Assert.AreEqual(ints.First(), bst.GetEnumeratorInOrder().First());
+            Assert.AreEqual(ints.Last(), bst.GetEnumeratorInOrder().Last());
         }
+
         #endregion
         #region PreOrder
         [TestMethod]
@@ -157,8 +158,9 @@ namespace DSTests
         {
             List<int> ints = new List<int> { 5, 3, 6, 4, 7, -6, 1, 4, 6, 0 };
             ints.ForEach(bst.Add);
-            ints.Sort();
             CollectionAssert.AreNotEqual(ints, bst.GetEnumeratorPreOrder().ToList());
+            Assert.AreEqual(5, bst.GetEnumeratorPreOrder().First());
+            Assert.AreEqual(6, bst.GetEnumeratorPreOrder().Last());
         }
         #endregion
         #region PostOrder
@@ -167,8 +169,9 @@ namespace DSTests
         {
             List<int> ints = new List<int> { 5, 3, 6, 4, 7, -6, 1, 4, 6, 0 };
             ints.ForEach(bst.Add);
-            ints.Sort();
             CollectionAssert.AreNotEqual(ints, bst.GetEnumeratorPostOrder().ToList());
+            Assert.AreEqual(0, bst.GetEnumeratorPostOrder().First());
+            Assert.AreEqual(5, bst.GetEnumeratorPostOrder().Last());
         }
         #endregion
         #endregion
