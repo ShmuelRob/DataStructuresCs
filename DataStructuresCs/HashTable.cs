@@ -37,7 +37,7 @@ namespace DataStructuresCs
             itemsCnt++;
         }
 
-        private int HashFunc(TKey key) =>
+        int HashFunc(TKey key) =>
             Math.Abs(key.GetHashCode()) % hashArray.Length;
     }
 }
