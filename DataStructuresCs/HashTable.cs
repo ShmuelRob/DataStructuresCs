@@ -154,7 +154,6 @@ namespace DataStructuresCs
                     int ind = HashFunction(key);
                     var foundData = hashArray[ind].First(d => d.key.Equals(key));
                     foundData.value = value;
-                    //foundData = new HashData<TKey, TValue>(key, value);
                 }
             }
         }
