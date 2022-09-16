@@ -55,6 +55,7 @@
     <Compile Include="StackTests.cs" />
     <Compile Include="QueueTests.cs" />
     <Compile Include="BstTests.cs" />
+    <Compile Include="HashTableTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

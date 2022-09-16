@@ -2,8 +2,8 @@
 {
     internal class HashData<TKey, TValue>
     {
-        public TKey key;
-        public TValue value;
+        internal TKey key;
+        internal TValue value;
 
         public HashData(TKey key, TValue value)
         {
