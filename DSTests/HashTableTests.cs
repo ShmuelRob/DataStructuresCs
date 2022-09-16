@@ -5,10 +5,6 @@ using System.Linq;
 using System.Globalization;
 using System.Collections.Generic;
 
-/**
-* TValue this[TKey key]
-*/
-
 namespace DSTests
 {
     [TestClass]
